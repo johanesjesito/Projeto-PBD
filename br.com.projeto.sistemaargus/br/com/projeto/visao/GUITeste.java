@@ -12,8 +12,11 @@ public class GUITeste extends JInternalFrame {
 	private JPanel contentPane;
 	
     public GUITeste() {
-		setTitle("Sistema Simulado 2");
-		
+    	setClosable(true);
+    	setIconifiable(true);
+		setTitle("Tela 1");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		        if ("Nimbus".equals(info.getName())) {
@@ -30,9 +33,7 @@ public class GUITeste extends JInternalFrame {
 		} catch (IllegalAccessException e) {
 		    // handle exception
 		}
-		
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		
+						
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setBounds(100, 100, 272, 227);
