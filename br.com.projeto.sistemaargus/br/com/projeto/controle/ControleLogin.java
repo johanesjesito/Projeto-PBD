@@ -10,9 +10,11 @@ import br.com.projeto.visao.TelaLogin;
 public class ControleLogin {
 
 	TelaLogin telaLogin;
+	TelaAreaDeTrabalho areaDeTrabalho;
 
-	public ControleLogin(TelaLogin telaLogin) {
+	public ControleLogin(TelaLogin telaLogin, TelaAreaDeTrabalho areaDeTrabalho) {
 		this.telaLogin = telaLogin;
+		this.areaDeTrabalho = areaDeTrabalho;
 		
 		telaLogin.getBtnLogin().addActionListener(new ActionListener() {
 			
@@ -20,17 +22,8 @@ public class ControleLogin {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							TelaAreaDeTrabalho frame = new TelaAreaDeTrabalho();
-							frame.setVisible(true);
-							ControleAreaDeTrabalho areaDeTrabalho = new ControleAreaDeTrabalho(frame);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
+				telaLogin.dispose();
+				areaDeTrabalho.getMnArquivos().setVisible(true);
 
 			}
 		});

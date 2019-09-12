@@ -15,7 +15,6 @@ public class GUITeste extends JInternalFrame {
     	setClosable(true);
     	setIconifiable(true);
 		setTitle("Tela 1");
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

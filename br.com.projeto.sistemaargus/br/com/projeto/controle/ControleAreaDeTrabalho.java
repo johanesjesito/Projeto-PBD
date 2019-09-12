@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import br.com.projeto.visao.GUITeste;
 import br.com.projeto.visao.TelaAreaDeTrabalho;
+import br.com.projeto.visao.TelaLogin;
 
 public class ControleAreaDeTrabalho {
 	
@@ -13,7 +14,13 @@ public class ControleAreaDeTrabalho {
 	public ControleAreaDeTrabalho(TelaAreaDeTrabalho areaDeTrabalho) {
 		this.areaDeTrabalho = areaDeTrabalho;
 		
-		areaDeTrabalho.getBtnButao().addActionListener(new ActionListener() {
+		TelaLogin telaLogin = new TelaLogin();
+		areaDeTrabalho.getjAreaTrabalho().add(telaLogin);
+		ControleLogin controleLogin = new ControleLogin(telaLogin, areaDeTrabalho);
+		telaLogin.setVisible(true);
+		areaDeTrabalho.getMnArquivos().setVisible(false);
+		
+		areaDeTrabalho.getMntmTela().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -21,6 +28,19 @@ public class ControleAreaDeTrabalho {
 				GUITeste guiTeste = new GUITeste();
 				areaDeTrabalho.getjAreaTrabalho().add(guiTeste);
 				guiTeste.setVisible(true);
+			}
+		});
+		
+		areaDeTrabalho.getMntmSair().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				TelaLogin telaLogin = new TelaLogin();
+				areaDeTrabalho.getjAreaTrabalho().add(telaLogin);
+				ControleLogin controleLogin = new ControleLogin(telaLogin, areaDeTrabalho);
+				telaLogin.setVisible(true);
+				areaDeTrabalho.getMnArquivos().setVisible(false);				
 			}
 		});
 	}

@@ -2,8 +2,8 @@ package br.com.projeto.principal;
 
 import java.awt.EventQueue;
 
-import br.com.projeto.controle.ControleLogin;
-import br.com.projeto.visao.TelaLogin;
+import br.com.projeto.controle.ControleAreaDeTrabalho;
+import br.com.projeto.visao.TelaAreaDeTrabalho;
 
 public class Main {
 
@@ -11,9 +11,9 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaLogin frame = new TelaLogin();
+					TelaAreaDeTrabalho frame = new TelaAreaDeTrabalho();
 					frame.setVisible(true);
-					ControleLogin controleLogin = new ControleLogin(frame);
+					ControleAreaDeTrabalho controleAreaDeTrabalho = new ControleAreaDeTrabalho(frame);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

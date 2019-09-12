@@ -16,13 +16,19 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import javax.swing.JMenuBar;
+import javax.swing.JTable;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
 
 public class TelaAreaDeTrabalho extends JFrame {
 	
 	private JPanel contentPane;
-
-	private JButton btnButao;
 	private JDesktopPane jAreaTrabalho;
+	private JMenu mnArquivos;
+	private JMenuItem mntmTela, mntmSair;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -42,7 +48,7 @@ public class TelaAreaDeTrabalho extends JFrame {
 	 */
 	public TelaAreaDeTrabalho() {
 		setResizable(false);
-		setTitle("Area De Trabalho");
+		setTitle("ARGUS");
 				
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -62,7 +68,7 @@ public class TelaAreaDeTrabalho extends JFrame {
 		}		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 500);
+		setBounds(10, 50, 1000, 500);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(0, 0, 0));
 		contentPane.setBackground(new Color(0, 0, 51));
@@ -71,24 +77,43 @@ public class TelaAreaDeTrabalho extends JFrame {
 		contentPane.setLayout(null);
 		
 		jAreaTrabalho = new JDesktopPane();
-		jAreaTrabalho.setBounds(108, 0, 886, 472);
+		jAreaTrabalho.setBounds(0, 21, 994, 451);		
 		contentPane.add(jAreaTrabalho);
 		
-		btnButao = new JButton("butao");
-		btnButao.setBounds(9, 11, 89, 23);
-		contentPane.add(btnButao);
+		JMenuBar telaMenuBar = new JMenuBar();
+		telaMenuBar.setBounds(0, 0, 994, 21);
+		contentPane.add(telaMenuBar);
 		
-		JSeparator separator = new JSeparator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(106, 0, 2, 472);
-		contentPane.add(separator);
-	}
-
-	public JButton getBtnButao() {
-		return btnButao;
+		mnArquivos = new JMenu("Arquivos");
+		telaMenuBar.add(mnArquivos);
+		
+		mntmTela = new JMenuItem("Tela");
+		mnArquivos.add(mntmTela);
+		
+		mntmSair = new JMenuItem("Sair");
+		mnArquivos.add(mntmSair);
+		
+		JLabel lblAreaDeTrabalho = new JLabel("");
+		lblAreaDeTrabalho.setBackground(Color.WHITE);
+		lblAreaDeTrabalho.setIcon(new ImageIcon("C:\\Users\\Johanes\\git\\Projeto-PBD\\files\\Arena de Trabalho.png"));
+		lblAreaDeTrabalho.setBounds(0, 0, 994, 451);
+		jAreaTrabalho.add(lblAreaDeTrabalho);
 	}
 
 	public JDesktopPane getjAreaTrabalho() {
 		return jAreaTrabalho;
 	}
+
+	public JMenu getMnArquivos() {
+		return mnArquivos;
+	}
+
+	public JMenuItem getMntmTela() {
+		return mntmTela;
+	}
+
+	public JMenuItem getMntmSair() {
+		return mntmSair;
+	}
+
 }

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.UIManager;
@@ -17,7 +18,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 
-public class TelaLogin extends JFrame {
+public class TelaLogin extends JInternalFrame {
 	
 	private JButton btnLogin, btnCriar;
 	
@@ -25,29 +26,9 @@ public class TelaLogin extends JFrame {
 	private JTextField txtLogin;
 	private JTextField txtSenha;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaLogin frame = new TelaLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public TelaLogin() {
-		setResizable(false);
-		setTitle("Sistema Simulado");
-				
+		setTitle("Login");
+		
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		        if ("Nimbus".equals(info.getName())) {
@@ -64,48 +45,44 @@ public class TelaLogin extends JFrame {
 		} catch (IllegalAccessException e) {
 		    // handle exception
 		}
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 500);
+		setBounds(380, 90, 230, 230);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBounds(100, 100, 230, 230);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		btnLogin = new JButton("LOGIN");
 		btnLogin.setFont(new Font("Ebrima", Font.BOLD, 14));
-		btnLogin.setBounds(200, 345, 89, 37);
+		btnLogin.setBounds(65, 108, 89, 37);
 		contentPane.add(btnLogin);
 		
 		btnCriar = new JButton("CRIAR");
 		btnCriar.setFont(new Font("Ebrima", Font.BOLD, 14));
-		btnCriar.setBounds(200, 393, 89, 37);
+		btnCriar.setBounds(65, 156, 89, 37);
 		contentPane.add(btnCriar);
 		
 		JLabel lblLogin = new JLabel("LOGIN");
 		lblLogin.setFont(new Font("Ebrima", Font.BOLD, 14));
-		lblLogin.setBounds(145, 255, 46, 14);
+		lblLogin.setBounds(10, 18, 46, 14);
 		contentPane.add(lblLogin);
 		
 		txtLogin = new JTextField();
-		txtLogin.setBounds(200, 248, 146, 26);
+		txtLogin.setBounds(65, 11, 146, 26);
 		contentPane.add(txtLogin);
 		txtLogin.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("SENHA");
 		lblSenha.setFont(new Font("Ebrima", Font.BOLD, 14));
-		lblSenha.setBounds(145, 292, 47, 14);
+		lblSenha.setBounds(10, 55, 47, 14);
 		contentPane.add(lblSenha);
 		
 		txtSenha = new JPasswordField();
-		txtSenha.setBounds(201, 285, 146, 26);
+		txtSenha.setBounds(66, 48, 146, 26);
 		contentPane.add(txtSenha);
 		txtSenha.setColumns(10);
-		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("C:\\Users\\Johanes\\git\\Projeto-PBD\\files\\icone-perfil.png"));
-		label.setBounds(165, 46, 188, 181);
-		contentPane.add(label);
+				
+		pack();
 	}
 
 	public JButton getBtnLogin() {
