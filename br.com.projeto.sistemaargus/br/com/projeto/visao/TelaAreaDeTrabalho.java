@@ -95,7 +95,7 @@ public class TelaAreaDeTrabalho extends JFrame {
 		
 		JLabel lblAreaDeTrabalho = new JLabel("");
 		lblAreaDeTrabalho.setBackground(Color.WHITE);
-		lblAreaDeTrabalho.setIcon(new ImageIcon("C:\\Users\\Johanes\\git\\Projeto-PBD\\files\\Arena de Trabalho.png"));
+		lblAreaDeTrabalho.setIcon(new ImageIcon("files/Arena de Trabalho.png"));
 		lblAreaDeTrabalho.setBounds(0, 0, 994, 451);
 		jAreaTrabalho.add(lblAreaDeTrabalho);
 	}
