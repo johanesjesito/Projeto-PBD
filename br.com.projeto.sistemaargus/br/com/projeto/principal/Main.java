@@ -11,6 +11,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					TelaAreaDeTrabalho frame = new TelaAreaDeTrabalho();
 					frame.setVisible(true);
 					ControleAreaDeTrabalho controleAreaDeTrabalho = new ControleAreaDeTrabalho(frame);

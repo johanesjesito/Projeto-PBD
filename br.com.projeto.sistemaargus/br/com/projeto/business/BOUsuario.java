@@ -22,8 +22,8 @@ public class BOUsuario extends BO<Usuario>{
 				|| t.getLogin().equals("") 
 				|| t.getSenha().equals(""))
 			throw new BOException("Os campos devem ser preenchidos");
-		if(t.getSenha().length() < 8 || t.getSenha().length() > 15)
-			throw new BOException("A senha deve ter maior que 7 e menor que 15");
+		if(t.getSenha().length() < 5 || t.getSenha().length() > 15)
+			throw new BOException("A senha deve ter maior que 4 e menor que 15");
 		try 
 		{
 			t.setSenha(SecurityUtil.criptografarSHA2(t.getSenha()));
@@ -44,8 +44,8 @@ public class BOUsuario extends BO<Usuario>{
 		
 		if(t.getSenha().length() != 40)
 		{
-			if(t.getSenha().length() < 8 || t.getSenha().length() > 15)
-				throw new BOException("A senha deve ter maior que 7 e menor que 15");
+			if(t.getSenha().length() < 5 || t.getSenha().length() > 15)
+				throw new BOException("A senha deve ter maior que 4 e menor que 15");
 			try 
 			{
 				t.setSenha(SecurityUtil.criptografarSHA2(t.getSenha()));

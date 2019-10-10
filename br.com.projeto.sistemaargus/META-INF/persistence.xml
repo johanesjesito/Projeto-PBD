@@ -8,7 +8,6 @@
     	<!-- 
     	Classes são descritas desta maneira,
     	<class>pacote.Classe</class> -->
-    	<class>entidade.Usuario</class>
      	
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
  
