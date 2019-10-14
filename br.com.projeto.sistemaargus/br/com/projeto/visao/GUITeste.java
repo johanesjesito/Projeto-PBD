@@ -13,7 +13,6 @@ public class GUITeste extends JInternalFrame {
 	
     public GUITeste() {
     	setClosable(true);
-    	setIconifiable(true);
 		setTitle("Tela 1");
 
 		try {

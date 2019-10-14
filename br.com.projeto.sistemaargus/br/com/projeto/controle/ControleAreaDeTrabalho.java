@@ -36,9 +36,6 @@ public class ControleAreaDeTrabalho {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				TelaLogin telaLogin = new TelaLogin();
-				areaDeTrabalho.getjAreaTrabalho().add(telaLogin);
-				ControleLogin controleLogin = new ControleLogin(telaLogin, areaDeTrabalho);
 				telaLogin.setVisible(true);
 				areaDeTrabalho.getMnArquivos().setVisible(false);				
 			}
