@@ -29,7 +29,7 @@ public class TelaLogin extends JInternalFrame {
 	
 	private JPanel contentPane;
 	private JTextField txtLogin;
-	private JTextField txtSenha;
+	private JPasswordField txtSenha;
 
 	public TelaLogin() {
 		
@@ -51,10 +51,10 @@ public class TelaLogin extends JInternalFrame {
 		} catch (IllegalAccessException e) {
 		    // handle exception
 		}
-		setBounds(380, 90, 0, 0);
+		setBounds(380, 90, 230, 230);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBounds(100, 100, 230, 230);
+		contentPane.setBounds(0, 0, 230, 230);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		

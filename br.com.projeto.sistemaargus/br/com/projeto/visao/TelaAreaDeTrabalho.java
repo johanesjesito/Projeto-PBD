@@ -30,22 +30,6 @@ public class TelaAreaDeTrabalho extends JFrame {
 	private JMenu mnArquivos;
 	private JMenuItem mntmTela, mntmSair;
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaAreaDeTrabalho frame = new TelaAreaDeTrabalho();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public TelaAreaDeTrabalho() {
 		setResizable(false);
 		setTitle("ARGUS");

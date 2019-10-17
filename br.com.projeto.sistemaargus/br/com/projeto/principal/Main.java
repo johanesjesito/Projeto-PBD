@@ -10,7 +10,7 @@ public class Main {
 
 	public static void main(String[] args) {
 				
-//		Facade.getInstance();
+		Facade.getInstance();
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
