@@ -195,7 +195,7 @@ public class TelaCadastro extends JInternalFrame {
 		return rdbtnPedagogo;
 	}
 
-	public JRadioButton getRdbtnPais() {
+	public JRadioButton getRdbtnResponsavel() {
 		return rdbtnResponsavel;
 	}
 	

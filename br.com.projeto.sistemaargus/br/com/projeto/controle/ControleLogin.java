@@ -98,8 +98,8 @@ public class ControleLogin {
 
 					if(telaCadastro.getRdbtnAluno().isSelected()==true)
 						usuario.setTipo("Aluno");
-					else if(telaCadastro.getRdbtnPais().isSelected()==true)
-						usuario.setTipo("Pais");
+					else if(telaCadastro.getRdbtnResponsavel().isSelected()==true)
+						usuario.setTipo("Responsavel");
 					else if(telaCadastro.getRdbtnPedagogo().isSelected()==true)
 						usuario.setTipo("Pedagogo");
 					else if(telaCadastro.getRdbtnProfessor().isSelected()==true)
