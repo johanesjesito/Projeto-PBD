@@ -19,6 +19,7 @@ public class ControleAreaDeTrabalho {
 		ControleLogin controleLogin = new ControleLogin(telaLogin, areaDeTrabalho);
 		telaLogin.setVisible(true);
 		areaDeTrabalho.getMnArquivos().setVisible(false);
+		areaDeTrabalho.getMnAdministrador().setVisible(false);
 		
 		areaDeTrabalho.getMntmTela().addActionListener(new ActionListener() {
 			
@@ -37,7 +38,8 @@ public class ControleAreaDeTrabalho {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				telaLogin.setVisible(true);
-				areaDeTrabalho.getMnArquivos().setVisible(false);				
+				areaDeTrabalho.getMnArquivos().setVisible(false);	
+				areaDeTrabalho.getMnAdministrador().setVisible(false);
 			}
 		});
 	}

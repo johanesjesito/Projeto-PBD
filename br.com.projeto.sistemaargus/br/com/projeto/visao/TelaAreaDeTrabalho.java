@@ -30,6 +30,8 @@ public class TelaAreaDeTrabalho extends JFrame {
 	private JMenu mnArquivos;
 	private JMenuItem mntmTela, mntmSair;
 	private JMenuItem mntmPerfil;
+	private JMenu mnAdministrador;
+	private JMenuItem mntmCadastroDeUsuario;
 	
 	public TelaAreaDeTrabalho() {
 		setResizable(false);
@@ -81,6 +83,12 @@ public class TelaAreaDeTrabalho extends JFrame {
 		mntmSair = new JMenuItem("Sair");
 		mnArquivos.add(mntmSair);
 		
+		mnAdministrador = new JMenu("Administrador");
+		telaMenuBar.add(mnAdministrador);
+		
+		mntmCadastroDeUsuario = new JMenuItem("Cadastro de Usuario");
+		mnAdministrador.add(mntmCadastroDeUsuario);
+		
 		JLabel lblAreaDeTrabalho = new JLabel("");
 		lblAreaDeTrabalho.setBackground(Color.WHITE);
 		lblAreaDeTrabalho.setIcon(new ImageIcon("files/Arena de Trabalho.png"));
@@ -106,6 +114,14 @@ public class TelaAreaDeTrabalho extends JFrame {
 
 	public JMenuItem getMntmPerfil() {
 		return mntmPerfil;
+	}
+
+	public JMenu getMnAdministrador() {
+		return mnAdministrador;
+	}
+
+	public JMenuItem getMntmCadastroDeUsuario() {
+		return mntmCadastroDeUsuario;
 	}
 	
 }
