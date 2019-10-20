@@ -6,7 +6,7 @@ import br.com.projeto.business.BOCurriculos;
 import br.com.projeto.business.BODisciplina;
 import br.com.projeto.business.BOEndereco;
 import br.com.projeto.business.BONotas;
-import br.com.projeto.business.BOPais;
+import br.com.projeto.business.BOResponsavel;
 import br.com.projeto.business.BOParcelas;
 import br.com.projeto.business.BOPedagogo;
 import br.com.projeto.business.BOProfessor;
@@ -19,7 +19,7 @@ import br.com.projeto.entidade.Disciplina;
 import br.com.projeto.entidade.Endereco;
 import br.com.projeto.entidade.Entidade;
 import br.com.projeto.entidade.Notas;
-import br.com.projeto.entidade.Pais;
+import br.com.projeto.entidade.Responsavel;
 import br.com.projeto.entidade.Parcelas;
 import br.com.projeto.entidade.Pedagogo;
 import br.com.projeto.entidade.Professor;
@@ -44,7 +44,7 @@ public class Facade {
 	private final BODisciplina boDisciplina;
 	private final BOEndereco boEndereco;
 	private final BONotas boNotas;
-	private final BOPais boPais;
+	private final BOResponsavel boPais;
 	private final BOParcelas boParcelas;
 	private final BOPedagogo boPedagogo;
 	private final BOProfessor boProfessor;
@@ -59,7 +59,7 @@ public class Facade {
 		boDisciplina = new BODisciplina();
 		boEndereco = new BOEndereco();
 		boNotas = new BONotas();
-		boPais = new BOPais();
+		boPais = new BOResponsavel();
 		boParcelas = new BOParcelas();
 		boPedagogo = new BOPedagogo();
 		boProfessor = new BOProfessor();
@@ -97,9 +97,9 @@ public class Facade {
 		{
 			boNotas.inserir((Notas)entidade);
 		}
-		else if(entidade instanceof Pais)
+		else if(entidade instanceof Responsavel)
 		{
-			boPais.inserir((Pais)entidade);
+			boPais.inserir((Responsavel)entidade);
 		}
 		else if(entidade instanceof Parcelas)
 		{
@@ -149,9 +149,9 @@ public class Facade {
 		{
 			boNotas.atualizar((Notas)entidade);
 		}
-		else if(entidade instanceof Pais)
+		else if(entidade instanceof Responsavel)
 		{
-			boPais.atualizar((Pais)entidade);
+			boPais.atualizar((Responsavel)entidade);
 		}
 		else if(entidade instanceof Parcelas)
 		{
@@ -201,7 +201,7 @@ public class Facade {
 		{
 			return boNotas.buscar(id);
 		}
-		else if(classe.getSimpleName().equals(Pais.class.getSimpleName()))
+		else if(classe.getSimpleName().equals(Responsavel.class.getSimpleName()))
 		{
 			return boPais.buscar(id);
 		}
@@ -254,9 +254,9 @@ public class Facade {
 		{
 			boNotas.remover((Notas)entidade);
 		}
-		else if(entidade instanceof Pais)
+		else if(entidade instanceof Responsavel)
 		{
-			boPais.remover((Pais)entidade);
+			boPais.remover((Responsavel)entidade);
 		}
 		else if(entidade instanceof Parcelas)
 		{
@@ -306,9 +306,9 @@ public class Facade {
 		{
 			boNotas.deletar((Notas)entidade);
 		}
-		else if(entidade instanceof Pais)
+		else if(entidade instanceof Responsavel)
 		{
-			boPais.deletar((Pais)entidade);
+			boPais.deletar((Responsavel)entidade);
 		}
 		else if(entidade instanceof Parcelas)
 		{

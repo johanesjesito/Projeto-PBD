@@ -29,6 +29,7 @@ public class TelaAreaDeTrabalho extends JFrame {
 	private JDesktopPane jAreaTrabalho;
 	private JMenu mnArquivos;
 	private JMenuItem mntmTela, mntmSair;
+	private JMenuItem mntmPerfil;
 	
 	public TelaAreaDeTrabalho() {
 		setResizable(false);
@@ -71,6 +72,9 @@ public class TelaAreaDeTrabalho extends JFrame {
 		mnArquivos = new JMenu("Arquivos");
 		telaMenuBar.add(mnArquivos);
 		
+		mntmPerfil = new JMenuItem("Perfil");
+		mnArquivos.add(mntmPerfil);
+		
 		mntmTela = new JMenuItem("Tela");
 		mnArquivos.add(mntmTela);
 		
@@ -100,4 +104,8 @@ public class TelaAreaDeTrabalho extends JFrame {
 		return mntmSair;
 	}
 
+	public JMenuItem getMntmPerfil() {
+		return mntmPerfil;
+	}
+	
 }
