@@ -39,26 +39,42 @@ public class ControleLogin {
 				// TODO Auto-generated method stub
 
 				try {
-					usuario = Facade.getInstance().getBoUsuario().buscarUsuario(telaLogin.getTxtLogin().getText(), telaLogin.getTxtSenha().getText());
+					usuario = Facade.getInstance().getBoUsuario().buscarUsuario(telaLogin.getTxtLogin().getText(),
+							telaLogin.getTxtSenha().getText());
 					tempSenha = telaLogin.getTxtSenha().getText();
-					
-					if(usuario.getTipo().equalsIgnoreCase("Administrador")) {
+
+					if (usuario.getTipo().equalsIgnoreCase("Administrador")) {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
 						areaDeTrabalho.getMnAdministrador().setVisible(true);
-						Mensagem.exibir("Bem Vindo Administrador");						
-					}
-					else {
+						Mensagem.exibir("Bem Vindo Administrador");
+					} else {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
-						Mensagem.exibir("Login efetuado com sucesso");						
+						Mensagem.exibir("Login efetuado com sucesso");
 					}
-										
+
 				} catch (DAOException e1) {
 					// TODO Auto-generated catch block
 					Mensagem.exibir(e1.getMessage());
 				}
+
+			}
+		});
+		
+		telaLogin.getBtnEsqueceuASenha().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try {
+					usuario = Facade.getInstance().getBoUsuario().buscarUsuario(telaLogin.getTxtLogin().getText());
 				
+					Mensagem.exibir("Enviado para o Administrador");					
+				} catch (DAOException e1) {
+					// TODO Auto-generated catch block
+					Mensagem.exibir(e1.getMessage());
+				}
 			}
 		});
 		

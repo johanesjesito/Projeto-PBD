@@ -5,9 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "parcelas")
+@Table(name = "parcela")
 //@NamedQuery(name = "Pesquisa.pessoa", query = "select p from Pesquisa as p where p.ativado = true and p.usuario = :usuario")
-public class Parcelas extends Entidade {
+public class Parcela extends Entidade {
 
 	@Column(nullable = false)
 	private int quantidade;

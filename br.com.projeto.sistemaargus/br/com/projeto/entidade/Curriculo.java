@@ -5,9 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "curriculos")
+@Table(name = "curriculo")
 //@NamedQuery(name = "Pesquisa.pessoa", query = "select p from Pesquisa as p where p.ativado = true and p.usuario = :usuario")
-public class Curriculos extends Entidade {
+public class Curriculo extends Entidade {
 
 	@Column(nullable = false)
 	private String nome;

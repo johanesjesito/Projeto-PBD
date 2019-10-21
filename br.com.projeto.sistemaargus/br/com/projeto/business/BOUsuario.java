@@ -21,7 +21,9 @@ public class BOUsuario extends BO<Usuario>{
 		super.validacaoInsercao(t);
 		if(t.getNome().equals("") 
 				|| t.getLogin().equals("") 
-				|| t.getSenha().equals(""))
+				|| t.getSenha().equals("")
+				|| t.getNome().equals("") 
+				|| t.getNaturalidade().equals(""))
 			throw new BOException("Os campos devem ser preenchidos");
 		if(t.getSenha().length() < 6 || t.getSenha().length() > 11) 
 			throw new BOException("A senha deve ter maior que 6 e menor que 11");
@@ -40,7 +42,9 @@ public class BOUsuario extends BO<Usuario>{
 		super.validacaoAtualizacao(t);
 		if(t.getNome().equals("") 
 				|| t.getLogin().equals("") 
-				|| t.getSenha().equals(""))
+				|| t.getSenha().equals("")
+				|| t.getNome().equals("") 
+				|| t.getNaturalidade().equals(""))
 			throw new BOException("Os campos devem ser preenchidos");
 		
 		if(t.getSenha().length() != 40)
@@ -75,6 +79,17 @@ public class BOUsuario extends BO<Usuario>{
 				"u.senha like '" + senhaHash + "' and u.ativado = true");
 		
 		if(u == null) throw new BOException("Não foram encontrado um usuario com esse login e senha");
+		
+		return u;
+	}
+	
+	public Usuario buscarUsuario(String login) throws BOException, DAOException
+	{
+				
+		Usuario u = ((DAOUsuario)this.daoT).buscaHQLGenerica(Usuario.class, 
+				"select u from Usuario as u where u.login like '" + login + "' and u.ativado = true");
+		
+		if(u == null) throw new BOException("Não foram encontrado um usuario com esse login");
 		
 		return u;
 	}

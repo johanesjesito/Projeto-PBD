@@ -22,6 +22,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class TelaLogin extends JInternalFrame {
 		
@@ -30,6 +31,7 @@ public class TelaLogin extends JInternalFrame {
 	private JPanel contentPane;
 	private JTextField txtLogin;
 	private JPasswordField txtSenha;
+	private JButton btnEsqueceuASenha;
 
 	public TelaLogin() {
 		
@@ -87,6 +89,13 @@ public class TelaLogin extends JInternalFrame {
 		txtSenha.setBounds(66, 67, 146, 26);
 		contentPane.add(txtSenha);
 		txtSenha.setColumns(10);
+		
+		btnEsqueceuASenha = new JButton("esqueceu a senha?");
+		btnEsqueceuASenha.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnEsqueceuASenha.setForeground(Color.BLUE);
+		btnEsqueceuASenha.setBounds(36, 93, 146, 23);
+		btnEsqueceuASenha.setContentAreaFilled(false);
+		contentPane.add(btnEsqueceuASenha);
 				
 		pack();
 	}
@@ -107,4 +116,8 @@ public class TelaLogin extends JInternalFrame {
 		return txtSenha;
 	}
 
+	public JButton getBtnEsqueceuASenha() {
+		return btnEsqueceuASenha;
+	}
+	
 }

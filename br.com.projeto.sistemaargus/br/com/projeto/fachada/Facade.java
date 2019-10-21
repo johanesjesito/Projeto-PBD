@@ -2,25 +2,25 @@ package br.com.projeto.fachada;
 
 import br.com.projeto.business.BOAcompPedagogo;
 import br.com.projeto.business.BOAluno;
-import br.com.projeto.business.BOCurriculos;
+import br.com.projeto.business.BOCurriculo;
 import br.com.projeto.business.BODisciplina;
 import br.com.projeto.business.BOEndereco;
-import br.com.projeto.business.BONotas;
+import br.com.projeto.business.BONota;
 import br.com.projeto.business.BOResponsavel;
-import br.com.projeto.business.BOParcelas;
+import br.com.projeto.business.BOParcela;
 import br.com.projeto.business.BOPedagogo;
 import br.com.projeto.business.BOProfessor;
 import br.com.projeto.business.BOTurma;
 import br.com.projeto.business.BOUsuario;
 import br.com.projeto.entidade.AcompPedagogo;
 import br.com.projeto.entidade.Aluno;
-import br.com.projeto.entidade.Curriculos;
+import br.com.projeto.entidade.Curriculo;
 import br.com.projeto.entidade.Disciplina;
 import br.com.projeto.entidade.Endereco;
 import br.com.projeto.entidade.Entidade;
-import br.com.projeto.entidade.Notas;
+import br.com.projeto.entidade.Nota;
 import br.com.projeto.entidade.Responsavel;
-import br.com.projeto.entidade.Parcelas;
+import br.com.projeto.entidade.Parcela;
 import br.com.projeto.entidade.Pedagogo;
 import br.com.projeto.entidade.Professor;
 import br.com.projeto.entidade.Turma;
@@ -40,12 +40,12 @@ public class Facade {
 	
 	private final BOAcompPedagogo boAcompPedagogo;
 	private final BOAluno boAluno;
-	private final BOCurriculos boCurriculos;
+	private final BOCurriculo boCurriculos;
 	private final BODisciplina boDisciplina;
 	private final BOEndereco boEndereco;
-	private final BONotas boNotas;
+	private final BONota boNotas;
 	private final BOResponsavel boPais;
-	private final BOParcelas boParcelas;
+	private final BOParcela boParcelas;
 	private final BOPedagogo boPedagogo;
 	private final BOProfessor boProfessor;
 	private final BOTurma boTurma;
@@ -55,12 +55,12 @@ public class Facade {
 	{
 		boAcompPedagogo = new BOAcompPedagogo();
 		boAluno = new BOAluno();
-		boCurriculos = new BOCurriculos();
+		boCurriculos = new BOCurriculo();
 		boDisciplina = new BODisciplina();
 		boEndereco = new BOEndereco();
-		boNotas = new BONotas();
+		boNotas = new BONota();
 		boPais = new BOResponsavel();
-		boParcelas = new BOParcelas();
+		boParcelas = new BOParcela();
 		boPedagogo = new BOPedagogo();
 		boProfessor = new BOProfessor();
 		boTurma = new BOTurma();
@@ -81,9 +81,9 @@ public class Facade {
 		{
 			boAluno.inserir((Aluno)entidade);
 		}
-		else if(entidade instanceof Curriculos)
+		else if(entidade instanceof Curriculo)
 		{
-			boCurriculos.inserir((Curriculos)entidade);
+			boCurriculos.inserir((Curriculo)entidade);
 		}
 		else if(entidade instanceof Disciplina)
 		{
@@ -93,17 +93,17 @@ public class Facade {
 		{
 			boEndereco.inserir((Endereco)entidade);
 		}
-		else if(entidade instanceof Notas)
+		else if(entidade instanceof Nota)
 		{
-			boNotas.inserir((Notas)entidade);
+			boNotas.inserir((Nota)entidade);
 		}
 		else if(entidade instanceof Responsavel)
 		{
 			boPais.inserir((Responsavel)entidade);
 		}
-		else if(entidade instanceof Parcelas)
+		else if(entidade instanceof Parcela)
 		{
-			boParcelas.inserir((Parcelas)entidade);
+			boParcelas.inserir((Parcela)entidade);
 		}
 		else if(entidade instanceof Pedagogo)
 		{
@@ -133,9 +133,9 @@ public class Facade {
 		{
 			boAluno.atualizar((Aluno)entidade);
 		}
-		else if(entidade instanceof Curriculos)
+		else if(entidade instanceof Curriculo)
 		{
-			boCurriculos.atualizar((Curriculos)entidade);
+			boCurriculos.atualizar((Curriculo)entidade);
 		}
 		else if(entidade instanceof Disciplina)
 		{
@@ -145,17 +145,17 @@ public class Facade {
 		{
 			boEndereco.atualizar((Endereco)entidade);
 		}
-		else if(entidade instanceof Notas)
+		else if(entidade instanceof Nota)
 		{
-			boNotas.atualizar((Notas)entidade);
+			boNotas.atualizar((Nota)entidade);
 		}
 		else if(entidade instanceof Responsavel)
 		{
 			boPais.atualizar((Responsavel)entidade);
 		}
-		else if(entidade instanceof Parcelas)
+		else if(entidade instanceof Parcela)
 		{
-			boParcelas.atualizar((Parcelas)entidade);
+			boParcelas.atualizar((Parcela)entidade);
 		}
 		else if(entidade instanceof Pedagogo)
 		{
@@ -185,7 +185,7 @@ public class Facade {
 		{
 			return boAluno.buscar(id);
 		}
-		else if(classe.getSimpleName().equals(Curriculos.class.getSimpleName()))
+		else if(classe.getSimpleName().equals(Curriculo.class.getSimpleName()))
 		{
 			return boCurriculos.buscar(id);
 		}
@@ -197,7 +197,7 @@ public class Facade {
 		{
 			return boEndereco.buscar(id);
 		}
-		else if(classe.getSimpleName().equals(Notas.class.getSimpleName()))
+		else if(classe.getSimpleName().equals(Nota.class.getSimpleName()))
 		{
 			return boNotas.buscar(id);
 		}
@@ -205,7 +205,7 @@ public class Facade {
 		{
 			return boPais.buscar(id);
 		}
-		else if(classe.getSimpleName().equals(Parcelas.class.getSimpleName()))
+		else if(classe.getSimpleName().equals(Parcela.class.getSimpleName()))
 		{
 			return boParcelas.buscar(id);
 		}
@@ -238,9 +238,9 @@ public class Facade {
 		{
 			boAluno.remover((Aluno)entidade);
 		}
-		else if(entidade instanceof Curriculos)
+		else if(entidade instanceof Curriculo)
 		{
-			boCurriculos.remover((Curriculos)entidade);
+			boCurriculos.remover((Curriculo)entidade);
 		}
 		else if(entidade instanceof Disciplina)
 		{
@@ -250,17 +250,17 @@ public class Facade {
 		{
 			boEndereco.remover((Endereco)entidade);
 		}
-		else if(entidade instanceof Notas)
+		else if(entidade instanceof Nota)
 		{
-			boNotas.remover((Notas)entidade);
+			boNotas.remover((Nota)entidade);
 		}
 		else if(entidade instanceof Responsavel)
 		{
 			boPais.remover((Responsavel)entidade);
 		}
-		else if(entidade instanceof Parcelas)
+		else if(entidade instanceof Parcela)
 		{
-			boParcelas.remover((Parcelas)entidade);
+			boParcelas.remover((Parcela)entidade);
 		}
 		else if(entidade instanceof Pedagogo)
 		{
@@ -290,9 +290,9 @@ public class Facade {
 		{
 			boAluno.deletar((Aluno)entidade);
 		}
-		else if(entidade instanceof Curriculos)
+		else if(entidade instanceof Curriculo)
 		{
-			boCurriculos.deletar((Curriculos)entidade);
+			boCurriculos.deletar((Curriculo)entidade);
 		}
 		else if(entidade instanceof Disciplina)
 		{
@@ -302,17 +302,17 @@ public class Facade {
 		{
 			boEndereco.deletar((Endereco)entidade);
 		}
-		else if(entidade instanceof Notas)
+		else if(entidade instanceof Nota)
 		{
-			boNotas.deletar((Notas)entidade);
+			boNotas.deletar((Nota)entidade);
 		}
 		else if(entidade instanceof Responsavel)
 		{
 			boPais.deletar((Responsavel)entidade);
 		}
-		else if(entidade instanceof Parcelas)
+		else if(entidade instanceof Parcela)
 		{
-			boParcelas.deletar((Parcelas)entidade);
+			boParcelas.deletar((Parcela)entidade);
 		}
 		else if(entidade instanceof Pedagogo)
 		{
