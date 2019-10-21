@@ -31,10 +31,11 @@ public class GUITeste extends JInternalFrame {
 		} catch (IllegalAccessException e) {
 		    // handle exception
 		}
-						
+	
+		setBounds(300, 90, 272, 227);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBounds(100, 100, 272, 227);
+		contentPane.setBounds(0, 0, 272, 227);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		

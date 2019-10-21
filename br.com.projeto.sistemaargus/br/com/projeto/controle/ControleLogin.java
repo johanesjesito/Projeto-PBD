@@ -16,6 +16,7 @@ import br.com.projeto.visao.TelaCadastro;
 import br.com.projeto.visao.TelaCadastroAdministrador;
 import br.com.projeto.visao.TelaLogin;
 import br.com.projeto.visao.TelaPerfil;
+import br.com.projeto.visao.TelaResetarSenha;
 
 public class ControleLogin {
 
@@ -32,6 +33,10 @@ public class ControleLogin {
 		TelaCadastro telaCadastro = new TelaCadastro();
 		areaDeTrabalho.getjAreaTrabalho().add(telaCadastro);
 		
+//		TelaResetarSenha resetarSenha = new TelaResetarSenha("Nome");
+//		areaDeTrabalho.getjAreaTrabalho().add(resetarSenha);
+//		resetarSenha.setVisible(true);
+		
 		telaLogin.getBtnLogin().addActionListener(new ActionListener() {
 			
 			@Override
@@ -43,11 +48,37 @@ public class ControleLogin {
 							telaLogin.getTxtSenha().getText());
 					tempSenha = telaLogin.getTxtSenha().getText();
 
+					if(usuario.isResetSenha()==true) {
+						try {
+							Usuario userTemp = new Usuario();
+
+							userTemp.setId(usuario.getId());
+							userTemp.setAtivado(usuario.isAtivado());
+							userTemp.setTipo(usuario.getTipo());
+							userTemp.setResetSenha(false);
+							userTemp.setNome(usuario.getNome());
+							userTemp.setLogin(usuario.getLogin());
+							userTemp.setNaturalidade(usuario.getNaturalidade());
+							userTemp.setSenha(tempSenha);								
+							userTemp.setDataDeNascimento(usuario.getDataDeNascimento());
+
+							Facade.getInstance().atualizar(userTemp);
+
+						} catch (ValidacaoException e1) {
+							// TODO Auto-generated catch block
+							Mensagem.exibir(e1.getMessage());
+						}
+
+					}
+					
 					if (usuario.getTipo().equalsIgnoreCase("Administrador")) {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
 						areaDeTrabalho.getMnAdministrador().setVisible(true);
 						Mensagem.exibir("Bem Vindo Administrador");
+						
+						
+						
 					} else {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
@@ -70,7 +101,28 @@ public class ControleLogin {
 				try {
 					usuario = Facade.getInstance().getBoUsuario().buscarUsuario(telaLogin.getTxtLogin().getText());
 				
-					Mensagem.exibir("Enviado para o Administrador");					
+					try {
+						Usuario userTemp = new Usuario();
+
+						userTemp.setId(usuario.getId());
+						userTemp.setAtivado(usuario.isAtivado());
+						userTemp.setTipo(usuario.getTipo());
+						userTemp.setResetSenha(true);
+						userTemp.setNome(usuario.getNome());
+						userTemp.setLogin(usuario.getLogin());
+						userTemp.setNaturalidade(usuario.getNaturalidade());
+						userTemp.setSenha(usuario.getLogin());								
+						userTemp.setDataDeNascimento(usuario.getDataDeNascimento());
+
+						Facade.getInstance().atualizar(userTemp);
+						
+						Mensagem.exibir("Senha alterada para padrão e mensagem enviado para o Administrador");					
+
+					} catch (ValidacaoException e1) {
+						// TODO Auto-generated catch block
+						Mensagem.exibir(e1.getMessage());
+					}
+					
 				} catch (DAOException e1) {
 					// TODO Auto-generated catch block
 					Mensagem.exibir(e1.getMessage());
