@@ -32,6 +32,11 @@ public class TelaAreaDeTrabalho extends JFrame {
 	private JMenuItem mntmPerfil;
 	private JMenu mnAdministrador;
 	private JMenuItem mntmCadastroDeUsuario;
+	private JMenu mnFuncionario;
+	private JMenu mnCoordenador;
+	private JMenu mnSecretario;
+	private JMenu mnDiretor;
+	private JMenuItem mntmCadastro;
 	
 	public TelaAreaDeTrabalho() {
 		setResizable(false);
@@ -89,6 +94,21 @@ public class TelaAreaDeTrabalho extends JFrame {
 		mntmCadastroDeUsuario = new JMenuItem("Cadastro de Usuario");
 		mnAdministrador.add(mntmCadastroDeUsuario);
 		
+		mnFuncionario = new JMenu("Funcionario");
+		telaMenuBar.add(mnFuncionario);
+		
+		mnCoordenador = new JMenu("Coordenador");
+		telaMenuBar.add(mnCoordenador);
+		
+		mnSecretario = new JMenu("Secretario");
+		telaMenuBar.add(mnSecretario);
+		
+		mntmCadastro = new JMenuItem("Cadastro");
+		mnSecretario.add(mntmCadastro);
+		
+		mnDiretor = new JMenu("Diretor");
+		telaMenuBar.add(mnDiretor);
+		
 		JLabel lblAreaDeTrabalho = new JLabel("");
 		lblAreaDeTrabalho.setBackground(Color.WHITE);
 		lblAreaDeTrabalho.setIcon(new ImageIcon("files/Arena de Trabalho.png"));
@@ -122,6 +142,26 @@ public class TelaAreaDeTrabalho extends JFrame {
 
 	public JMenuItem getMntmCadastroDeUsuario() {
 		return mntmCadastroDeUsuario;
+	}
+
+	public JMenu getMnFuncionario() {
+		return mnFuncionario;
+	}
+
+	public JMenu getMnCoordenador() {
+		return mnCoordenador;
+	}
+
+	public JMenu getMnSecretario() {
+		return mnSecretario;
+	}
+
+	public JMenu getMnDiretor() {
+		return mnDiretor;
+	}
+
+	public JMenuItem getMntmCadastro() {
+		return mntmCadastro;
 	}
 	
 }

@@ -6,8 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "professor")
-//@NamedQuery(name = "Pesquisa.pessoa", query = "select p from Pesquisa as p where p.ativado = true and p.usuario = :usuario")
-public class Professor extends Entidade {
+public class Professor extends Usuario {
 	
 	@Column(nullable = false)
 	private String cpf;

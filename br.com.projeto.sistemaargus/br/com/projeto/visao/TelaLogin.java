@@ -26,7 +26,7 @@ import java.awt.Color;
 
 public class TelaLogin extends JInternalFrame {
 		
-	private JButton btnLogin, btnCriar;
+	private JButton btnLogin;
 	
 	private JPanel contentPane;
 	private JTextField txtLogin;
@@ -53,22 +53,17 @@ public class TelaLogin extends JInternalFrame {
 		} catch (IllegalAccessException e) {
 		    // handle exception
 		}
-		setBounds(380, 90, 230, 230);
+		setBounds(380, 90, 230, 200);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBounds(0, 0, 230, 230);
+		contentPane.setBounds(0, 0, 230, 200);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		btnLogin = new JButton("LOGIN");
 		btnLogin.setFont(new Font("Ebrima", Font.BOLD, 14));
-		btnLogin.setBounds(65, 127, 89, 37);
+		btnLogin.setBounds(65, 134, 89, 37);
 		contentPane.add(btnLogin);
-		
-		btnCriar = new JButton("CRIAR");
-		btnCriar.setFont(new Font("Ebrima", Font.BOLD, 14));
-		btnCriar.setBounds(65, 175, 89, 37);
-		contentPane.add(btnCriar);
 		
 		JLabel lblLogin = new JLabel("LOGIN");
 		lblLogin.setFont(new Font("Ebrima", Font.BOLD, 14));
@@ -102,10 +97,6 @@ public class TelaLogin extends JInternalFrame {
 
 	public JButton getBtnLogin() {
 		return btnLogin;
-	}
-
-	public JButton getBtnCriar() {
-		return btnCriar;
 	}
 
 	public JTextField getTxtLogin() {

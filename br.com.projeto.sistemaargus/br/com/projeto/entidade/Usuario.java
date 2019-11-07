@@ -7,17 +7,20 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "usuario")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario extends Entidade{
 
 	@Column(nullable = false)
 	private String nome;
-	@Column(unique = true, nullable = false)
+	@Column(unique = true, nullable = true)
 	private String login;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String senha;
 	@Column(name = "data_Nascimento", nullable = false)
 	private LocalDate dataDeNascimento;

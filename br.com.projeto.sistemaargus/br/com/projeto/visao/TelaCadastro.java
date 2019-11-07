@@ -2,6 +2,7 @@ package br.com.projeto.visao;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -15,12 +16,15 @@ import sun.util.calendar.JulianCalendar;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import java.awt.Font;
 import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.swing.JRadioButton;
+import javax.swing.JSeparator;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -28,22 +32,28 @@ import javax.swing.JFormattedTextField;
 public class TelaCadastro extends JInternalFrame {
 
 	private JPanel contentPane;
-	private JTextField txtLogin;
-	private JTextField txtSenha;
 	private JTextField txtNome;
+	private JTextField txtCpf;
 	private JTextField txtNaturalidade;
-	private JRadioButton rdbtnResponsavel;
-	private JRadioButton rdbtnAluno;
 	private JRadioButton rdbtnProfessor;
 	private JRadioButton rdbtnPedagogo;
+	private JRadioButton rdbtnResponsavel;
 	private JLabel lblDataDeNascimento;
-	private JButton btnVolta, btnConfirmar;
+	private JButton btnConfirmar;
 	private ButtonGroup buttonGroup;
 	private JDateChooser txtDataNascimento;
+	private JTextField txtEstado;
+	private JTextField txtCep;
+	private JTextField txtCidade;
+	private JTextField txtNumero;
+	private JTextField txtCelular;
+	private JLabel lblCelular;
+	private JLabel lblTelefone;
+	private JTextField txtTelefone;
 	
     public TelaCadastro() {
-
-		((BasicInternalFrameUI) getUI()).setNorthPane(null);
+    	setTitle("Cadastro");
+    	setClosable(true);
 
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -62,129 +72,158 @@ public class TelaCadastro extends JInternalFrame {
 		    // handle exception
 		}
 		
-		setBounds(300, 90, 345, 270);
+		setBounds(145, 70, 700, 303);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBounds(0, 0, 345, 270);
+		contentPane.setBounds(0, 0, 700, 270);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblLogin = new JLabel("Login:");
-		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblLogin.setBounds(27, 22, 33, 14);
-		contentPane.add(lblLogin);
-		
-		txtLogin = new JTextField();
-		txtLogin.setBounds(70, 15, 248, 29);
-		contentPane.add(txtLogin);
-		txtLogin.setColumns(10);
-		
-		JLabel lblSenha = new JLabel("Senha:");
-		lblSenha.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblSenha.setBounds(27, 55, 44, 14);
-		contentPane.add(lblSenha);
-		
-		txtSenha = new JTextField();
-		txtSenha.setBounds(76, 48, 242, 29);
-		contentPane.add(txtSenha);
-		txtSenha.setColumns(10);
-		
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNome.setBounds(27, 88, 44, 14);
+		lblNome.setBounds(27, 22, 44, 14);
 		contentPane.add(lblNome);
 		
 		txtNome = new JTextField();
-		txtNome.setColumns(10);
-		txtNome.setBounds(70, 81, 248, 29);
+		txtNome.setBounds(70, 15, 248, 29);
 		contentPane.add(txtNome);
+		txtNome.setColumns(10);
+		
+		JLabel lblCpf = new JLabel("CPF:");
+		lblCpf.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCpf.setBounds(27, 62, 44, 14);
+		contentPane.add(lblCpf);
+		
+		txtCpf = new JTextField();
+		txtCpf.setColumns(10);
+		txtCpf.setBounds(70, 55, 248, 29);
+		contentPane.add(txtCpf);
 		
 		JLabel lblNaturalidade = new JLabel("Naturalidade:");
 		lblNaturalidade.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNaturalidade.setBounds(27, 121, 75, 14);
+		lblNaturalidade.setBounds(27, 102, 75, 14);
 		contentPane.add(lblNaturalidade);
 		
 		txtNaturalidade = new JTextField();
 		txtNaturalidade.setColumns(10);
-		txtNaturalidade.setBounds(112, 114, 206, 29);
+		txtNaturalidade.setBounds(112, 95, 206, 29);
 		contentPane.add(txtNaturalidade);
 		
-		rdbtnResponsavel = new JRadioButton("Responsavel");
-		rdbtnResponsavel.setBounds(6, 159, 97, 23);
-		contentPane.add(rdbtnResponsavel);
-		rdbtnResponsavel.setSelected(true);
-		
-		rdbtnAluno = new JRadioButton("Aluno");
-		rdbtnAluno.setBounds(105, 159, 53, 23);
-		contentPane.add(rdbtnAluno);
-		
 		rdbtnProfessor = new JRadioButton("Professor");
-		rdbtnProfessor.setBounds(160, 159, 86, 23);
+		rdbtnProfessor.setSelected(true);
+		rdbtnProfessor.setBounds(27, 138, 83, 23);
 		contentPane.add(rdbtnProfessor);
 		
 		rdbtnPedagogo = new JRadioButton("Pedagogo");
-		rdbtnPedagogo.setBounds(248, 159, 91, 23);
+		rdbtnPedagogo.setBounds(112, 138, 80, 23);
 		contentPane.add(rdbtnPedagogo);
+		
+		rdbtnResponsavel = new JRadioButton("Responsavel");
+		rdbtnResponsavel.setBounds(195, 138, 91, 23);
+		contentPane.add(rdbtnResponsavel);
 		
 		lblDataDeNascimento = new JLabel("Data de Nascimento:");
 		lblDataDeNascimento.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblDataDeNascimento.setBounds(27, 207, 116, 14);
+		lblDataDeNascimento.setBounds(27, 175, 116, 14);
 		contentPane.add(lblDataDeNascimento);
 
 		txtDataNascimento = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
 		txtDataNascimento.setDate(new Date());
-		txtDataNascimento.setBounds(153, 200, 165, 29);
+		txtDataNascimento.setBounds(153, 168, 165, 29);
 		contentPane.add(txtDataNascimento);
-		
-		btnVolta = new JButton("Volta");
-		btnVolta.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnVolta.setBounds(178, 240, 89, 23);
-		contentPane.add(btnVolta);
 		
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnConfirmar.setBounds(70, 240, 89, 23);
+		btnConfirmar.setBounds(112, 211, 89, 23);
 		contentPane.add(btnConfirmar);
 		
 		buttonGroup = new ButtonGroup();
-		buttonGroup.add(rdbtnResponsavel);
-		buttonGroup.add(rdbtnAluno);
-		buttonGroup.add(rdbtnPedagogo);
 		buttonGroup.add(rdbtnProfessor);
+		buttonGroup.add(rdbtnResponsavel);
+		buttonGroup.add(rdbtnPedagogo);
+		
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setBounds(345, 0, 2, 274);
+		contentPane.add(separator);
+		
+		JLabel lblCep = new JLabel("CEP:");
+		lblCep.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCep.setBounds(375, 22, 33, 14);
+		contentPane.add(lblCep);
+		
+		txtEstado = new JTextField();
+		txtEstado.setColumns(10);
+		txtEstado.setBounds(434, 81, 232, 29);
+		contentPane.add(txtEstado);
+		
+		txtCep = new JTextField();
+		txtCep.setColumns(10);
+		txtCep.setBounds(418, 15, 248, 29);
+		contentPane.add(txtCep);
+		
+		txtCidade = new JTextField();
+		txtCidade.setColumns(10);
+		txtCidade.setBounds(424, 48, 242, 29);
+		contentPane.add(txtCidade);
+		
+		JLabel lblCidade = new JLabel("Cidade:");
+		lblCidade.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCidade.setBounds(375, 55, 44, 14);
+		contentPane.add(lblCidade);
+		
+		JLabel lblEstado = new JLabel("Estado:");
+		lblEstado.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblEstado.setBounds(375, 88, 52, 14);
+		contentPane.add(lblEstado);
+		
+		JLabel lblNumero = new JLabel("Numero:");
+		lblNumero.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNumero.setBounds(375, 121, 52, 14);
+		contentPane.add(lblNumero);
+		
+		txtNumero = new JTextField();
+		txtNumero.setColumns(10);
+		txtNumero.setBounds(434, 114, 232, 29);
+		contentPane.add(txtNumero);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(346, 159, 354, 2);
+		contentPane.add(separator_1);
+		
+		txtCelular = new JTextField();
+		txtCelular.setColumns(10);
+		txtCelular.setBounds(434, 205, 232, 29);
+		contentPane.add(txtCelular);
+		
+		lblCelular = new JLabel("Celular:");
+		lblCelular.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCelular.setBounds(375, 212, 52, 14);
+		contentPane.add(lblCelular);
+		
+		lblTelefone = new JLabel("Telefone:");
+		lblTelefone.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTelefone.setBounds(375, 179, 52, 14);
+		contentPane.add(lblTelefone);
+		
+		txtTelefone = new JTextField();
+		txtTelefone.setColumns(10);
+		txtTelefone.setBounds(434, 172, 232, 29);
+		contentPane.add(txtTelefone);
 		
         pack();
     }
-
-	public JButton getBtnVolta() {
-		return btnVolta;
-	}
-
-	public JButton getBtnConfirmar() {
-		return btnConfirmar;
-	}
-
-	public JTextField getTxtLogin() {
-		return txtLogin;
-	}
-
-	public JTextField getTxtSenha() {
-		return txtSenha;
-	}
 
 	public JTextField getTxtNome() {
 		return txtNome;
 	}
 
+	public JTextField getTxtCpf() {
+		return txtCpf;
+	}
+
 	public JTextField getTxtNaturalidade() {
 		return txtNaturalidade;
-	}
-
-	public JDateChooser getTxtDataNascimento() {
-		return txtDataNascimento;
-	}
-
-	public JRadioButton getRdbtnAluno() {
-		return rdbtnAluno;
 	}
 
 	public JRadioButton getRdbtnProfessor() {
@@ -198,5 +237,37 @@ public class TelaCadastro extends JInternalFrame {
 	public JRadioButton getRdbtnResponsavel() {
 		return rdbtnResponsavel;
 	}
-	
+
+	public JButton getBtnConfirmar() {
+		return btnConfirmar;
+	}
+
+	public JDateChooser getTxtDataNascimento() {
+		return txtDataNascimento;
+	}
+
+	public JTextField getTxtEstado() {
+		return txtEstado;
+	}
+
+	public JTextField getTxtCep() {
+		return txtCep;
+	}
+
+	public JTextField getTxtCidade() {
+		return txtCidade;
+	}
+
+	public JTextField getTxtNumero() {
+		return txtNumero;
+	}
+
+	public JTextField getTxtCelular() {
+		return txtCelular;
+	}
+
+	public JTextField getTxtTelefone() {
+		return txtTelefone;
+	}
+    
 }
