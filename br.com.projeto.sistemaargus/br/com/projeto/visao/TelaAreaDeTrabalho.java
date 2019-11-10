@@ -37,6 +37,7 @@ public class TelaAreaDeTrabalho extends JFrame {
 	private JMenu mnSecretario;
 	private JMenu mnDiretor;
 	private JMenuItem mntmCadastro;
+	private JMenuItem mntmCadastrarAluno;
 	
 	public TelaAreaDeTrabalho() {
 		setResizable(false);
@@ -106,6 +107,9 @@ public class TelaAreaDeTrabalho extends JFrame {
 		mntmCadastro = new JMenuItem("Cadastro");
 		mnSecretario.add(mntmCadastro);
 		
+		mntmCadastrarAluno = new JMenuItem("Cadastrar Aluno");
+		mnSecretario.add(mntmCadastrarAluno);
+		
 		mnDiretor = new JMenu("Diretor");
 		telaMenuBar.add(mnDiretor);
 		
@@ -162,6 +166,10 @@ public class TelaAreaDeTrabalho extends JFrame {
 
 	public JMenuItem getMntmCadastro() {
 		return mntmCadastro;
+	}
+
+	public JMenuItem getMntmCadastrarAluno() {
+		return mntmCadastrarAluno;
 	}
 	
 }

@@ -50,6 +50,7 @@ public class TelaCadastro extends JInternalFrame {
 	private JLabel lblCelular;
 	private JLabel lblTelefone;
 	private JTextField txtTelefone;
+	private JTextField txtRua;
 	
     public TelaCadastro() {
     	setTitle("Cadastro");
@@ -75,7 +76,7 @@ public class TelaCadastro extends JInternalFrame {
 		setBounds(145, 70, 700, 303);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBounds(0, 0, 700, 270);
+		contentPane.setBounds(0, 0, 700, 280);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -154,7 +155,7 @@ public class TelaCadastro extends JInternalFrame {
 		
 		txtEstado = new JTextField();
 		txtEstado.setColumns(10);
-		txtEstado.setBounds(434, 81, 232, 29);
+		txtEstado.setBounds(428, 48, 238, 29);
 		contentPane.add(txtEstado);
 		
 		txtCep = new JTextField();
@@ -164,52 +165,62 @@ public class TelaCadastro extends JInternalFrame {
 		
 		txtCidade = new JTextField();
 		txtCidade.setColumns(10);
-		txtCidade.setBounds(424, 48, 242, 29);
+		txtCidade.setBounds(424, 81, 242, 29);
 		contentPane.add(txtCidade);
 		
 		JLabel lblCidade = new JLabel("Cidade:");
 		lblCidade.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblCidade.setBounds(375, 55, 44, 14);
+		lblCidade.setBounds(375, 88, 44, 14);
 		contentPane.add(lblCidade);
 		
 		JLabel lblEstado = new JLabel("Estado:");
 		lblEstado.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblEstado.setBounds(375, 88, 52, 14);
+		lblEstado.setBounds(375, 55, 52, 14);
 		contentPane.add(lblEstado);
 		
 		JLabel lblNumero = new JLabel("Numero:");
 		lblNumero.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNumero.setBounds(375, 121, 52, 14);
+		lblNumero.setBounds(375, 153, 52, 14);
 		contentPane.add(lblNumero);
 		
 		txtNumero = new JTextField();
 		txtNumero.setColumns(10);
-		txtNumero.setBounds(434, 114, 232, 29);
+		txtNumero.setBounds(428, 146, 238, 29);
 		contentPane.add(txtNumero);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(346, 159, 354, 2);
+		separator_1.setBounds(345, 186, 354, 2);
 		contentPane.add(separator_1);
 		
 		txtCelular = new JTextField();
 		txtCelular.setColumns(10);
-		txtCelular.setBounds(434, 205, 232, 29);
+		txtCelular.setBounds(434, 234, 232, 29);
 		contentPane.add(txtCelular);
 		
 		lblCelular = new JLabel("Celular:");
 		lblCelular.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblCelular.setBounds(375, 212, 52, 14);
+		lblCelular.setBounds(375, 241, 52, 14);
 		contentPane.add(lblCelular);
 		
 		lblTelefone = new JLabel("Telefone:");
 		lblTelefone.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblTelefone.setBounds(375, 179, 52, 14);
+		lblTelefone.setBounds(375, 208, 52, 14);
 		contentPane.add(lblTelefone);
 		
 		txtTelefone = new JTextField();
 		txtTelefone.setColumns(10);
-		txtTelefone.setBounds(434, 172, 232, 29);
+		txtTelefone.setBounds(434, 201, 232, 29);
 		contentPane.add(txtTelefone);
+		
+		JLabel lblRua = new JLabel("Rua:");
+		lblRua.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblRua.setBounds(375, 121, 44, 14);
+		contentPane.add(lblRua);
+		
+		txtRua = new JTextField();
+		txtRua.setColumns(10);
+		txtRua.setBounds(418, 114, 248, 29);
+		contentPane.add(txtRua);
 		
         pack();
     }
@@ -268,6 +279,10 @@ public class TelaCadastro extends JInternalFrame {
 
 	public JTextField getTxtTelefone() {
 		return txtTelefone;
+	}
+
+	public JTextField getTxtRua() {
+		return txtRua;
 	}
     
 }

@@ -2,6 +2,7 @@ package br.com.projeto.fachada;
 
 import br.com.projeto.business.BOAcompPedagogo;
 import br.com.projeto.business.BOAluno;
+import br.com.projeto.business.BOContato;
 import br.com.projeto.business.BOCurriculo;
 import br.com.projeto.business.BODisciplina;
 import br.com.projeto.business.BOEndereco;
@@ -14,6 +15,7 @@ import br.com.projeto.business.BOTurma;
 import br.com.projeto.business.BOUsuario;
 import br.com.projeto.entidade.AcompPedagogo;
 import br.com.projeto.entidade.Aluno;
+import br.com.projeto.entidade.Contato;
 import br.com.projeto.entidade.Curriculo;
 import br.com.projeto.entidade.Disciplina;
 import br.com.projeto.entidade.Endereco;
@@ -44,12 +46,13 @@ public class Facade {
 	private final BODisciplina boDisciplina;
 	private final BOEndereco boEndereco;
 	private final BONota boNotas;
-	private final BOResponsavel boPais;
+	private final BOResponsavel boResponsavel;
 	private final BOParcela boParcelas;
 	private final BOPedagogo boPedagogo;
 	private final BOProfessor boProfessor;
 	private final BOTurma boTurma;
 	private final BOUsuario boUsuario;
+	private final BOContato boContato;
 
 	private Facade() 
 	{
@@ -59,12 +62,13 @@ public class Facade {
 		boDisciplina = new BODisciplina();
 		boEndereco = new BOEndereco();
 		boNotas = new BONota();
-		boPais = new BOResponsavel();
+		boResponsavel = new BOResponsavel();
 		boParcelas = new BOParcela();
 		boPedagogo = new BOPedagogo();
 		boProfessor = new BOProfessor();
 		boTurma = new BOTurma();
 		boUsuario = new BOUsuario();
+		boContato = new BOContato();
 	}
 
 	public <T extends Entidade> void inserir(T entidade) throws ValidacaoException
@@ -99,7 +103,7 @@ public class Facade {
 		}
 		else if(entidade instanceof Responsavel)
 		{
-			boPais.inserir((Responsavel)entidade);
+			boResponsavel.inserir((Responsavel)entidade);
 		}
 		else if(entidade instanceof Parcela)
 		{
@@ -116,6 +120,10 @@ public class Facade {
 		else if(entidade instanceof Turma)
 		{
 			boTurma.inserir((Turma)entidade);
+		}
+		else if(entidade instanceof Contato)
+		{
+			boContato.inserir((Contato)entidade);
 		}
 	}
 	
@@ -151,7 +159,7 @@ public class Facade {
 		}
 		else if(entidade instanceof Responsavel)
 		{
-			boPais.atualizar((Responsavel)entidade);
+			boResponsavel.atualizar((Responsavel)entidade);
 		}
 		else if(entidade instanceof Parcela)
 		{
@@ -168,6 +176,10 @@ public class Facade {
 		else if(entidade instanceof Turma)
 		{
 			boTurma.atualizar((Turma)entidade);
+		}
+		else if(entidade instanceof Contato)
+		{
+			boContato.atualizar((Contato)entidade);
 		}
 	}
 	
@@ -203,7 +215,7 @@ public class Facade {
 		}
 		else if(classe.getSimpleName().equals(Responsavel.class.getSimpleName()))
 		{
-			return boPais.buscar(id);
+			return boResponsavel.buscar(id);
 		}
 		else if(classe.getSimpleName().equals(Parcela.class.getSimpleName()))
 		{
@@ -220,6 +232,10 @@ public class Facade {
 		else if(classe.getSimpleName().equals(Turma.class.getSimpleName()))
 		{
 			return boTurma.buscar(id);
+		}
+		else if(classe.getSimpleName().equals(Contato.class.getSimpleName()))
+		{
+			return boContato.buscar(id);
 		}
 		return null;
 	}
@@ -256,7 +272,7 @@ public class Facade {
 		}
 		else if(entidade instanceof Responsavel)
 		{
-			boPais.remover((Responsavel)entidade);
+			boResponsavel.remover((Responsavel)entidade);
 		}
 		else if(entidade instanceof Parcela)
 		{
@@ -273,7 +289,11 @@ public class Facade {
 		else if(entidade instanceof Turma)
 		{
 			boTurma.remover((Turma)entidade);
-		}	
+		}
+		else if(entidade instanceof Contato)
+		{
+			boContato.remover((Contato)entidade);
+		}
 	}
 	
 	public <T extends Entidade> void deletar(T entidade) throws ValidacaoException
@@ -308,7 +328,7 @@ public class Facade {
 		}
 		else if(entidade instanceof Responsavel)
 		{
-			boPais.deletar((Responsavel)entidade);
+			boResponsavel.deletar((Responsavel)entidade);
 		}
 		else if(entidade instanceof Parcela)
 		{
@@ -325,11 +345,20 @@ public class Facade {
 		else if(entidade instanceof Turma)
 		{
 			boTurma.deletar((Turma)entidade);
-		}	
+		}
+		else if(entidade instanceof Contato)
+		{
+			boContato.deletar((Contato)entidade);
+		}
 	}
 	
 	
 	public BOUsuario getBoUsuario() {return boUsuario;}
-//	public BOPesquisa getBoPesquisa() {return boPesquisa;}
+	public BOProfessor getBoProfessor() {return boProfessor;}
+	public BOPedagogo getBoPedagogo() {return boPedagogo;}
+	public BOResponsavel getBoResponsavel() {return boResponsavel;}
+	public BOAluno getBoAluno() {return boAluno;}
+	public BOEndereco getBoEndereco() {return boEndereco;}
+	public BOContato getBoContato() {return boContato;}
 	
 }

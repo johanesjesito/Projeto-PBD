@@ -20,8 +20,11 @@ public class BOUsuario extends BO<Usuario> {
 	@Override
 	protected void validacaoInsercao(Usuario t) throws BOException {
 		super.validacaoInsercao(t);
-		if (!t.getTipo().equals("Professor") || !t.getTipo().equals("Aluno") || !t.getTipo().equals("Pedagogo")
-				|| !t.getTipo().equals("Responsavel")) {
+		if (t.getTipo().equals("Professor") || t.getTipo().equals("Aluno") || t.getTipo().equals("Pedagogo")
+				|| t.getTipo().equals("Responsavel")) {
+			if (t.getNome().equals("") || t.getNaturalidade().equals(""))
+				throw new BOException("Os campos devem ser preenchidos");
+		} else {
 			if (t.getNome().equals("") || t.getLogin().equals("") || t.getSenha().equals("")
 					|| t.getNaturalidade().equals(""))
 				throw new BOException("Os campos devem ser preenchidos");
@@ -32,9 +35,6 @@ public class BOUsuario extends BO<Usuario> {
 			} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
 				throw new BOException("Erro ao Inserir Usuário");
 			}
-		} else {
-			if (t.getNome().equals("") || t.getNaturalidade().equals(""))
-				throw new BOException("Os campos devem ser preenchidos");
 		}
 	}
 

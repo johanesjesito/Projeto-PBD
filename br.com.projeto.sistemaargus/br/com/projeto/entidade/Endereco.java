@@ -2,16 +2,16 @@ package br.com.projeto.entidade;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "endereco")
-//@NamedQuery(name = "Pesquisa.pessoa", query = "select p from Pesquisa as p where p.ativado = true and p.usuario = :usuario")
+@NamedQuery(name = "Endereco.usuario", query = "select e from Endereco as e where e.ativado = true and e.usuario = :usuario")
 public class Endereco extends Entidade {
 	
-	@Column(nullable = false)
-	private String nome;
 	@Column(nullable = false)
 	private int numero;
 	@Column(nullable = false)
@@ -22,17 +22,10 @@ public class Endereco extends Entidade {
 	private String estado;
 	@Column(nullable = false)
 	private String cep;
-	@Column
-	private String telefone;
-	@Column
-	private String celular;
+	@OneToOne
+	@JoinColumn(name = "usuario_id", nullable = false)
+	private Usuario usuario;
 	
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 	public int getNumero() {
 		return numero;
 	}
@@ -63,17 +56,11 @@ public class Endereco extends Entidade {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	public String getTelefone() {
-		return telefone;
+	public Usuario getUsuario() {
+		return usuario;
 	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-	public String getCelular() {
-		return celular;
-	}
-	public void setCelular(String celular) {
-		this.celular = celular;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

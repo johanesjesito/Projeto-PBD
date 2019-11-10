@@ -1,47 +1,34 @@
 package br.com.projeto.visao;
 
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.util.Date;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
-import javax.swing.text.MaskFormatter;
 
 import com.toedter.calendar.JDateChooser;
+import javax.swing.JComboBox;
 
-import sun.util.calendar.JulianCalendar;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.Font;
-import java.text.ParseException;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
-
-public class TelaCadastroAdministrador extends JInternalFrame {
+public class TelaCadastroAluno extends JInternalFrame {
 
 	private JPanel contentPane;
-	private JTextField txtLogin;
-	private JTextField txtSenha;
 	private JTextField txtNome;
+	private JTextField txtCpf;
 	private JTextField txtNaturalidade;
-	private JRadioButton rdbtnCoordenador;
-	private JRadioButton rdbtnDiretor;
-	private JRadioButton rdbtnSecretario;
-	private JRadioButton rdbtnFuncionario;
 	private JLabel lblDataDeNascimento;
 	private JButton btnConfirmar;
-	private ButtonGroup buttonGroup;
 	private JDateChooser txtDataNascimento;
 	private JTextField txtEstado;
 	private JTextField txtCep;
@@ -52,9 +39,14 @@ public class TelaCadastroAdministrador extends JInternalFrame {
 	private JLabel lblTelefone;
 	private JTextField txtTelefone;
 	private JTextField txtRua;
+	private JComboBox txtResponsavel;
+	private JLabel lblPai;
+	private JTextField txtPai;
+	private JLabel lblMae;
+	private JTextField txtMae;
 	
-    public TelaCadastroAdministrador() {
-    	setTitle("Cadastro Administrativo");
+	public TelaCadastroAluno() {
+    	setTitle("Cadastro Aluno");
     	setClosable(true);
 
 		try {
@@ -81,83 +73,50 @@ public class TelaCadastroAdministrador extends JInternalFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblLogin = new JLabel("Login:");
-		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblLogin.setBounds(27, 22, 33, 14);
-		contentPane.add(lblLogin);
-		
-		txtLogin = new JTextField();
-		txtLogin.setBounds(70, 15, 248, 29);
-		contentPane.add(txtLogin);
-		txtLogin.setColumns(10);
-		
-		JLabel lblSenha = new JLabel("Senha:");
-		lblSenha.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblSenha.setBounds(27, 55, 44, 14);
-		contentPane.add(lblSenha);
-		
-		txtSenha = new JPasswordField();
-		txtSenha.setBounds(76, 48, 242, 29);
-		contentPane.add(txtSenha);
-		txtSenha.setColumns(10);
-		
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNome.setBounds(27, 88, 44, 14);
+		lblNome.setBounds(27, 22, 44, 14);
 		contentPane.add(lblNome);
 		
 		txtNome = new JTextField();
-		txtNome.setColumns(10);
-		txtNome.setBounds(70, 81, 248, 29);
+		txtNome.setBounds(70, 15, 248, 29);
 		contentPane.add(txtNome);
+		txtNome.setColumns(10);
+		
+		JLabel lblCpf = new JLabel("CPF:");
+		lblCpf.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCpf.setBounds(27, 55, 44, 14);
+		contentPane.add(lblCpf);
+		
+		txtCpf = new JTextField();
+		txtCpf.setColumns(10);
+		txtCpf.setBounds(70, 48, 248, 29);
+		contentPane.add(txtCpf);
 		
 		JLabel lblNaturalidade = new JLabel("Naturalidade:");
 		lblNaturalidade.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNaturalidade.setBounds(27, 121, 75, 14);
+		lblNaturalidade.setBounds(27, 153, 75, 14);
 		contentPane.add(lblNaturalidade);
 		
 		txtNaturalidade = new JTextField();
 		txtNaturalidade.setColumns(10);
-		txtNaturalidade.setBounds(112, 114, 206, 29);
+		txtNaturalidade.setBounds(112, 146, 206, 29);
 		contentPane.add(txtNaturalidade);
-		
-		rdbtnCoordenador = new JRadioButton("Coordenador");
-		rdbtnCoordenador.setBounds(6, 159, 97, 23);
-		contentPane.add(rdbtnCoordenador);
-		rdbtnCoordenador.setSelected(true);
-		
-		rdbtnDiretor = new JRadioButton("Diretor");
-		rdbtnDiretor.setBounds(104, 159, 59, 23);
-		contentPane.add(rdbtnDiretor);
-		
-		rdbtnSecretario = new JRadioButton("Secretario");
-		rdbtnSecretario.setBounds(165, 159, 80, 23);
-		contentPane.add(rdbtnSecretario);
-		
-		rdbtnFuncionario = new JRadioButton("Funcionario");
-		rdbtnFuncionario.setBounds(248, 159, 91, 23);
-		contentPane.add(rdbtnFuncionario);
 		
 		lblDataDeNascimento = new JLabel("Data de Nascimento:");
 		lblDataDeNascimento.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblDataDeNascimento.setBounds(27, 207, 116, 14);
+		lblDataDeNascimento.setBounds(27, 218, 116, 14);
 		contentPane.add(lblDataDeNascimento);
 
 		txtDataNascimento = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
 		txtDataNascimento.setDate(new Date());
-		txtDataNascimento.setBounds(153, 200, 165, 29);
+		txtDataNascimento.setBounds(153, 211, 165, 29);
 		contentPane.add(txtDataNascimento);
 		
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnConfirmar.setBounds(127, 240, 89, 23);
+		btnConfirmar.setBounds(112, 243, 89, 23);
 		contentPane.add(btnConfirmar);
-		
-		buttonGroup = new ButtonGroup();
-		buttonGroup.add(rdbtnCoordenador);
-		buttonGroup.add(rdbtnDiretor);
-		buttonGroup.add(rdbtnFuncionario);
-		buttonGroup.add(rdbtnSecretario);
 		
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
@@ -238,47 +197,57 @@ public class TelaCadastroAdministrador extends JInternalFrame {
 		txtRua.setBounds(418, 114, 248, 29);
 		contentPane.add(txtRua);
 		
+		JLabel lblResponsavel = new JLabel("Responsavel:");
+		lblResponsavel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblResponsavel.setBounds(27, 185, 75, 14);
+		contentPane.add(lblResponsavel);
+		
+		txtResponsavel = new JComboBox();
+		txtResponsavel.setBounds(112, 178, 206, 29);
+		contentPane.add(txtResponsavel);
+		
+		lblPai = new JLabel("Pai:");
+		lblPai.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblPai.setBounds(27, 87, 44, 14);
+		contentPane.add(lblPai);
+		
+		txtPai = new JTextField();
+		txtPai.setColumns(10);
+		txtPai.setBounds(70, 80, 248, 29);
+		contentPane.add(txtPai);
+		
+		lblMae = new JLabel("M\u00E3e:");
+		lblMae.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblMae.setBounds(27, 121, 44, 14);
+		contentPane.add(lblMae);
+		
+		txtMae = new JTextField();
+		txtMae.setColumns(10);
+		txtMae.setBounds(70, 114, 248, 29);
+		contentPane.add(txtMae);
+		
         pack();
-    }
-
-	public JButton getBtnConfirmar() {
-		return btnConfirmar;
-	}
-
-	public JTextField getTxtLogin() {
-		return txtLogin;
-	}
-
-	public JTextField getTxtSenha() {
-		return txtSenha;
+        
 	}
 
 	public JTextField getTxtNome() {
 		return txtNome;
 	}
 
+	public JTextField getTxtCpf() {
+		return txtCpf;
+	}
+
 	public JTextField getTxtNaturalidade() {
 		return txtNaturalidade;
 	}
 
+	public JButton getBtnConfirmar() {
+		return btnConfirmar;
+	}
+
 	public JDateChooser getTxtDataNascimento() {
 		return txtDataNascimento;
-	}
-
-	public JRadioButton getRdbtnCoordenador() {
-		return rdbtnCoordenador;
-	}
-
-	public JRadioButton getRdbtnDiretor() {
-		return rdbtnDiretor;
-	}
-
-	public JRadioButton getRdbtnSecretario() {
-		return rdbtnSecretario;
-	}
-
-	public JRadioButton getRdbtnFuncionario() {
-		return rdbtnFuncionario;
 	}
 
 	public JTextField getTxtEstado() {
@@ -307,6 +276,18 @@ public class TelaCadastroAdministrador extends JInternalFrame {
 
 	public JTextField getTxtRua() {
 		return txtRua;
+	}
+
+	public JComboBox getTxtResponsavel() {
+		return txtResponsavel;
+	}
+
+	public JTextField getTxtPai() {
+		return txtPai;
+	}
+
+	public JTextField getTxtMae() {
+		return txtMae;
 	}
 	
 }
