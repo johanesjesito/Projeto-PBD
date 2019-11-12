@@ -97,6 +97,12 @@ public class TelaCadastro extends JInternalFrame {
 		
 		txtCpf = new JTextField();
 		txtCpf.setColumns(10);
+		try {
+			txtCpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		txtCpf.setBounds(70, 55, 248, 29);
 		contentPane.add(txtCpf);
 		
@@ -120,7 +126,7 @@ public class TelaCadastro extends JInternalFrame {
 		contentPane.add(rdbtnPedagogo);
 		
 		rdbtnResponsavel = new JRadioButton("Responsavel");
-		rdbtnResponsavel.setBounds(195, 138, 91, 23);
+		rdbtnResponsavel.setBounds(195, 138, 110, 23);
 		contentPane.add(rdbtnResponsavel);
 		
 		lblDataDeNascimento = new JLabel("Data de Nascimento:");

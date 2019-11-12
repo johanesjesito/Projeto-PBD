@@ -2,6 +2,7 @@ package br.com.projeto.business;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import br.com.projeto.dao.DAOUsuario;
 import br.com.projeto.entidade.Professor;
@@ -83,5 +84,22 @@ public class BOUsuario extends BO<Usuario> {
 			throw new BOException("Não foram encontrado um usuario com esse login");
 
 		return u;
+	}
+	
+	public Usuario buscarUsuarioPorNome(String nome) throws BOException, DAOException {
+
+		Usuario u = ((DAOUsuario) this.daoT).buscaHQLGenerica(Usuario.class,
+				"select u from Usuario as u where u.nome like '" + nome + "' and u.ativado = true");
+
+		if (u == null)
+			throw new BOException("Não foram encontrado um usuario com esse login");
+
+		return u;
+	}
+	
+	public List<Usuario> buscarUsuarioPorTipo(String tipo) throws BOException, DAOException {
+		
+		return 	((DAOUsuario) this.daoT).buscaListaHQLGenerica(Usuario.class,
+				"select u from Usuario as u where u.tipo like '" + tipo + "' and u.ativado = true");
 	}
 }

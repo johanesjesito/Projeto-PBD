@@ -62,7 +62,7 @@ public class TelaPerfil extends JInternalFrame {
 		setBounds(145, 70, 700, 303);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBounds(0, 0, 700, 270);
+		contentPane.setBounds(0, 0, 700, 280);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		

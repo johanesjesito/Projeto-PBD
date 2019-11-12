@@ -12,15 +12,15 @@ public class BOEndereco extends BO<Endereco> {
 		super(new DAOEndereco(), Endereco.class);
 	}
 
-//	public Endereco buscarEndereco(int login) throws BOException, DAOException {
-//
-//		Endereco u = ((DAOEndereco) this.daoT).buscaHQLGenerica(Endereco.class,
-//				"select u from Endereco as u where u.usuario_id = '" + login + "' and u.ativado = true");
-//
-//		if (u == null)
-//			throw new BOException("Não foram encontrado um Endereco com esse login");
-//
-//		return u;
-//	}
+	public Endereco buscarEndereco(int usuario_id) throws BOException, DAOException {
+
+		Endereco u = ((DAOEndereco) this.daoT).buscaHQLGenerica(Endereco.class,
+				"select u from Endereco as u where u.usuario.id = '" + usuario_id + "' and u.ativado = true");
+
+		if (u == null)
+			throw new BOException("Não foram encontrado um Endereco com esse login");
+
+		return u;
+	}
 	
 }

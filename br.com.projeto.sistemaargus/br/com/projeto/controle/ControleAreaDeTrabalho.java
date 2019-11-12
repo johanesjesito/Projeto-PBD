@@ -3,7 +3,6 @@ package br.com.projeto.controle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import br.com.projeto.visao.GUITeste;
 import br.com.projeto.visao.TelaAreaDeTrabalho;
 import br.com.projeto.visao.TelaLogin;
 
@@ -24,17 +23,6 @@ public class ControleAreaDeTrabalho {
 		areaDeTrabalho.getMnDiretor().setVisible(false);
 		areaDeTrabalho.getMnFuncionario().setVisible(false);
 		areaDeTrabalho.getMnSecretario().setVisible(false);
-		
-		areaDeTrabalho.getMntmTela().addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				GUITeste guiTeste = new GUITeste();
-				areaDeTrabalho.getjAreaTrabalho().add(guiTeste);
-				guiTeste.setVisible(true);
-			}
-		});
 		
 		areaDeTrabalho.getMntmSair().addActionListener(new ActionListener() {
 			

@@ -6,7 +6,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "disciplina")
-//@NamedQuery(name = "Pesquisa.pessoa", query = "select p from Pesquisa as p where p.ativado = true and p.usuario = :usuario")
 public class Disciplina extends Entidade {
 
 	@Column(nullable = false)
@@ -15,6 +14,7 @@ public class Disciplina extends Entidade {
 	private int cargaHoraria;
 	@Column(nullable = false)
 	private String status_disciplina;
+	
 	public String getNome() {
 		return nome;
 	}

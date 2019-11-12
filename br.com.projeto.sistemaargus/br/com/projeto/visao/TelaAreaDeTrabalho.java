@@ -1,7 +1,5 @@
 package br.com.projeto.visao;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -9,15 +7,10 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
-import br.com.projeto.controle.ControleAreaDeTrabalho;
 
 import javax.swing.JDesktopPane;
-import javax.swing.JButton;
 import java.awt.Color;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
 import javax.swing.JMenuBar;
-import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
@@ -28,7 +21,7 @@ public class TelaAreaDeTrabalho extends JFrame {
 	private JPanel contentPane;
 	private JDesktopPane jAreaTrabalho;
 	private JMenu mnArquivos;
-	private JMenuItem mntmTela, mntmSair;
+	private JMenuItem mntmSair;
 	private JMenuItem mntmPerfil;
 	private JMenu mnAdministrador;
 	private JMenuItem mntmCadastroDeUsuario;
@@ -38,6 +31,9 @@ public class TelaAreaDeTrabalho extends JFrame {
 	private JMenu mnDiretor;
 	private JMenuItem mntmCadastro;
 	private JMenuItem mntmCadastrarAluno;
+	private JMenuItem mntmAcompanhamento;
+	private JMenuItem mntmCadastrarDisciplina;
+	private JMenuItem mntmCadastrarNotas;
 	
 	public TelaAreaDeTrabalho() {
 		setResizable(false);
@@ -83,9 +79,6 @@ public class TelaAreaDeTrabalho extends JFrame {
 		mntmPerfil = new JMenuItem("Perfil");
 		mnArquivos.add(mntmPerfil);
 		
-		mntmTela = new JMenuItem("Tela");
-		mnArquivos.add(mntmTela);
-		
 		mntmSair = new JMenuItem("Sair");
 		mnArquivos.add(mntmSair);
 		
@@ -98,8 +91,17 @@ public class TelaAreaDeTrabalho extends JFrame {
 		mnFuncionario = new JMenu("Funcionario");
 		telaMenuBar.add(mnFuncionario);
 		
+		mntmCadastrarDisciplina = new JMenuItem("Cadastrar Disciplina");
+		mnFuncionario.add(mntmCadastrarDisciplina);
+		
+		mntmCadastrarNotas = new JMenuItem("Cadastrar Notas");
+		mnFuncionario.add(mntmCadastrarNotas);
+		
 		mnCoordenador = new JMenu("Coordenador");
 		telaMenuBar.add(mnCoordenador);
+		
+		mntmAcompanhamento = new JMenuItem("Acompanhamento");
+		mnCoordenador.add(mntmAcompanhamento);
 		
 		mnSecretario = new JMenu("Secretario");
 		telaMenuBar.add(mnSecretario);
@@ -126,10 +128,6 @@ public class TelaAreaDeTrabalho extends JFrame {
 
 	public JMenu getMnArquivos() {
 		return mnArquivos;
-	}
-
-	public JMenuItem getMntmTela() {
-		return mntmTela;
 	}
 
 	public JMenuItem getMntmSair() {
@@ -171,5 +169,17 @@ public class TelaAreaDeTrabalho extends JFrame {
 	public JMenuItem getMntmCadastrarAluno() {
 		return mntmCadastrarAluno;
 	}
-	
+
+	public JMenuItem getMntmAcompanhamento() {
+		return mntmAcompanhamento;
+	}
+
+	public JMenuItem getMntmCadastrarDisciplina() {
+		return mntmCadastrarDisciplina;
+	}
+
+	public JMenuItem getMntmCadastrarNotas() {
+		return mntmCadastrarNotas;
+	}
+
 }

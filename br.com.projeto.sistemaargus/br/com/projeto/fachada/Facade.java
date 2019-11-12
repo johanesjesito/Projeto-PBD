@@ -360,5 +360,6 @@ public class Facade {
 	public BOAluno getBoAluno() {return boAluno;}
 	public BOEndereco getBoEndereco() {return boEndereco;}
 	public BOContato getBoContato() {return boContato;}
+	public BOAcompPedagogo getBoAcompPedagogo() {return boAcompPedagogo;}
 	
 }

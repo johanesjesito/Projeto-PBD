@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
+
+import javax.swing.DefaultComboBoxModel;
 
 import br.com.projeto.entidade.Aluno;
 import br.com.projeto.entidade.Contato;
@@ -12,6 +15,8 @@ import br.com.projeto.entidade.Endereco;
 import br.com.projeto.entidade.Pedagogo;
 import br.com.projeto.entidade.Professor;
 import br.com.projeto.entidade.Responsavel;
+import br.com.projeto.entidade.Usuario;
+import br.com.projeto.exceptions.DAOException;
 import br.com.projeto.exceptions.ValidacaoException;
 import br.com.projeto.fachada.Facade;
 import br.com.projeto.visao.Mensagem;
@@ -23,6 +28,8 @@ public class ControleSecretario {
 	
 	TelaAreaDeTrabalho areaDeTrabalho;
 	DateTimeFormatter formatter;
+	List<Usuario> usuarios;
+	Usuario usuario;
 
 	public ControleSecretario(TelaAreaDeTrabalho areaDeTrabalho) {
 		this.areaDeTrabalho = areaDeTrabalho;
@@ -35,7 +42,7 @@ public class ControleSecretario {
 				TelaCadastro telaCadastro = new TelaCadastro();
 				areaDeTrabalho.getjAreaTrabalho().add(telaCadastro);
 				telaCadastro.setVisible(true);
-				
+								
 				telaCadastro.getBtnConfirmar().addActionListener(new ActionListener() {
 					
 					@Override
@@ -52,7 +59,10 @@ public class ControleSecretario {
 								Date date = new Date();
 								date = telaCadastro.getTxtDataNascimento().getDate();
 								responsavel.setDataDeNascimento(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+								responsavel.setTipo("Responsavel");								
 								
+								responsavel.setResetSenha(false);
+
 								if (!telaCadastro.getTxtCidade().getText().equals("")
 										&& !telaCadastro.getTxtEstado().getText().equals("")
 										&& !telaCadastro.getTxtRua().getText().equals("")
@@ -74,7 +84,6 @@ public class ControleSecretario {
 										contato.setCelular(telaCadastro.getTxtCelular().getText());
 										contato.setTelefone(telaCadastro.getTxtTelefone().getText());
 
-										responsavel.setTipo("Responsavel");								
 										Facade.getInstance().inserir(responsavel);																		
 										endereco.setUsuario(responsavel);
 										contato.setUsuario(responsavel);
@@ -94,6 +103,9 @@ public class ControleSecretario {
 								Date date = new Date();
 								date = telaCadastro.getTxtDataNascimento().getDate();
 								pedagogo.setDataDeNascimento(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+								pedagogo.setTipo("Pedagogo");								
+
+								pedagogo.setResetSenha(false);
 								
 								if (!telaCadastro.getTxtCidade().getText().equals("")
 										&& !telaCadastro.getTxtEstado().getText().equals("")
@@ -116,7 +128,6 @@ public class ControleSecretario {
 										contato.setCelular(telaCadastro.getTxtCelular().getText());
 										contato.setTelefone(telaCadastro.getTxtTelefone().getText());
 
-										pedagogo.setTipo("Pedagogo");								
 										Facade.getInstance().inserir(pedagogo);																			
 										contato.setUsuario(pedagogo);
 										endereco.setUsuario(pedagogo);
@@ -135,6 +146,7 @@ public class ControleSecretario {
 								Date date = new Date();
 								date = telaCadastro.getTxtDataNascimento().getDate();
 								professor.setDataDeNascimento(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+								professor.setTipo("Professor");								
 								
 								professor.setResetSenha(false);
 
@@ -159,7 +171,6 @@ public class ControleSecretario {
 										contato.setCelular(telaCadastro.getTxtCelular().getText());
 										contato.setTelefone(telaCadastro.getTxtTelefone().getText());
 
-										professor.setTipo("Professor");								
 										Facade.getInstance().inserir(professor);
 										contato.setUsuario(professor);
 										endereco.setUsuario(professor);
@@ -191,7 +202,20 @@ public class ControleSecretario {
 				TelaCadastroAluno telaCadastrarAluno = new TelaCadastroAluno();
 				areaDeTrabalho.getjAreaTrabalho().add(telaCadastrarAluno);
 				telaCadastrarAluno.setVisible(true);
-				
+
+				final DefaultComboBoxModel combo = new DefaultComboBoxModel();
+
+				try {
+					usuarios = Facade.getInstance().getBoUsuario().buscarUsuarioPorTipo("Responsavel");
+					for (Usuario usuario2 : usuarios) {
+						combo.addElement(usuario2.getNome());
+					}		
+				} catch (DAOException e2) {
+					// TODO Auto-generated catch block
+					Mensagem.exibir(e2.getMessage());
+				}
+				telaCadastrarAluno.getTxtResponsavel().setModel(combo);	
+								
 				telaCadastrarAluno.getBtnConfirmar().addActionListener(new ActionListener() {
 					
 					@Override
@@ -210,10 +234,10 @@ public class ControleSecretario {
 							aluno.setPai(telaCadastrarAluno.getTxtPai().getText());
 							aluno.setMae(telaCadastrarAluno.getTxtMae().getText());
 
-							/* fazer metodo de chamar Responsavel */
-//							aluno.setResponsavel(responsavel);
-							/* fazer metodo de chamar Responsavel */
-
+							usuario = Facade.getInstance().getBoUsuario().buscarUsuarioPorNome(telaCadastrarAluno.getTxtResponsavel().getSelectedItem().toString());
+							
+							aluno.setResponsavel((Responsavel) usuario);
+							
 							if (!telaCadastrarAluno.getTxtCidade().getText().equals("")
 									&& !telaCadastrarAluno.getTxtEstado().getText().equals("")
 									&& !telaCadastrarAluno.getTxtRua().getText().equals("")
@@ -235,7 +259,7 @@ public class ControleSecretario {
 									contato.setCelular(telaCadastrarAluno.getTxtCelular().getText());
 									contato.setTelefone(telaCadastrarAluno.getTxtTelefone().getText());
 
-									aluno.setTipo("Responsavel");
+									aluno.setTipo("Aluno");
 									Facade.getInstance().inserir(aluno);
 									endereco.setUsuario(aluno);
 									contato.setUsuario(aluno);
