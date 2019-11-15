@@ -11,6 +11,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JComboBox;
 
 public class TelaCadastrarDisciplina extends JInternalFrame {
 
@@ -51,7 +52,7 @@ public class TelaCadastrarDisciplina extends JInternalFrame {
 		
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnConfirmar.setBounds(139, 121, 89, 23);
+		btnConfirmar.setBounds(141, 120, 89, 23);
 		contentPane.add(btnConfirmar);
 		
 		JLabel lblNome = new JLabel("Nome:");

@@ -34,6 +34,8 @@ public class TelaAreaDeTrabalho extends JFrame {
 	private JMenuItem mntmAcompanhamento;
 	private JMenuItem mntmCadastrarDisciplina;
 	private JMenuItem mntmCadastrarNotas;
+	private JMenuItem mntmCadastrarCurriculoAluno;
+	private JMenuItem mntmCadastrarDisciplinasNa;
 	
 	public TelaAreaDeTrabalho() {
 		setResizable(false);
@@ -94,8 +96,14 @@ public class TelaAreaDeTrabalho extends JFrame {
 		mntmCadastrarDisciplina = new JMenuItem("Cadastrar Disciplina");
 		mnFuncionario.add(mntmCadastrarDisciplina);
 		
+		mntmCadastrarDisciplinasNa = new JMenuItem("Cadastrar Disciplinas na Turma");
+		mnFuncionario.add(mntmCadastrarDisciplinasNa);
+		
 		mntmCadastrarNotas = new JMenuItem("Cadastrar Notas");
 		mnFuncionario.add(mntmCadastrarNotas);
+		
+		mntmCadastrarCurriculoAluno = new JMenuItem("Cadastrar Curriculo do Aluno");
+		mnFuncionario.add(mntmCadastrarCurriculoAluno);
 		
 		mnCoordenador = new JMenu("Coordenador");
 		telaMenuBar.add(mnCoordenador);
@@ -180,6 +188,14 @@ public class TelaAreaDeTrabalho extends JFrame {
 
 	public JMenuItem getMntmCadastrarNotas() {
 		return mntmCadastrarNotas;
+	}
+
+	public JMenuItem getMntmCadastrarCurriculoAluno() {
+		return mntmCadastrarCurriculoAluno;
+	}
+
+	public JMenuItem getMntmCadastrarDisciplinasNa() {
+		return mntmCadastrarDisciplinasNa;
 	}
 
 }

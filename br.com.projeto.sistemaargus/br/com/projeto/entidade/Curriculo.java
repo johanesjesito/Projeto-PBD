@@ -2,53 +2,47 @@ package br.com.projeto.entidade;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "curriculo")
-//@NamedQuery(name = "Pesquisa.pessoa", query = "select p from Pesquisa as p where p.ativado = true and p.usuario = :usuario")
 public class Curriculo extends Entidade {
 
 	@Column(nullable = false)
-	private String nome;
+	private int ano_letivo;
 	@Column(nullable = false)
-	private boolean BiTreMestre;
+	private String situacao;
 	@Column(nullable = false)
-	private int anoLetivo;
-	@Column(nullable = false)
-	private String disciplinas_alocadas;
-	@Column(nullable = false)
-	private String status;
-	
-	public String getNome() {
-		return nome;
+	private String turma;
+	@OneToOne
+	@JoinColumn(name = "aluno_id", nullable = false)
+	private Aluno aluno;
+
+	public int getAno_letivo() {
+		return ano_letivo;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setAno_letivo(int ano_letivo) {
+		this.ano_letivo = ano_letivo;
 	}
-	public boolean isBiTreMestre() {
-		return BiTreMestre;
+	public String getSituacao() {
+		return situacao;
 	}
-	public void setBiTreMestre(boolean biTreMestre) {
-		BiTreMestre = biTreMestre;
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
 	}
-	public int getAnoLetivo() {
-		return anoLetivo;
+	public String getTurma() {
+		return turma;
 	}
-	public void setAnoLetivo(int anoLetivo) {
-		this.anoLetivo = anoLetivo;
+	public void setTurma(String turma) {
+		this.turma = turma;
 	}
-	public String getDisciplinas_alocadas() {
-		return disciplinas_alocadas;
+	public Aluno getAluno() {
+		return aluno;
 	}
-	public void setDisciplinas_alocadas(String disciplinas_alocadas) {
-		this.disciplinas_alocadas = disciplinas_alocadas;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
 	}
 	
 }

@@ -16,6 +16,10 @@ public class Nota extends Entidade {
 	private double media_geral;
 	@Column(nullable = false)
 	private int ano_letivo;
+	@Column(nullable = false)
+	private String bimestral_trimestral;
+	@Column(nullable = false)
+	private String turma;
 	@OneToOne
 	@JoinColumn(name = "aluno_id", nullable = false)
 	private Aluno aluno;
@@ -43,6 +47,27 @@ public class Nota extends Entidade {
 	}
 	public Disciplina getDisciplina() {
 		return disciplina;
+	}
+	public void setAno_letivo(int ano_letivo) {
+		this.ano_letivo = ano_letivo;
+	}
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
+	}
+	public String getBimestral_trimestral() {
+		return bimestral_trimestral;
+	}
+	public void setBimestral_trimestral(String bimestral_trimestral) {
+		this.bimestral_trimestral = bimestral_trimestral;
+	}
+	public String getTurma() {
+		return turma;
+	}
+	public void setTurma(String turma) {
+		this.turma = turma;
 	}
 	
 }
