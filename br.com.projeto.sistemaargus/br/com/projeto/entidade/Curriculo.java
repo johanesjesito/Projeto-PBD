@@ -17,8 +17,8 @@ public class Curriculo extends Entidade {
 	@Column(nullable = false)
 	private String turma;
 	@OneToOne
-	@JoinColumn(name = "aluno_id", nullable = false)
-	private Aluno aluno;
+	@JoinColumn(name = "turmaAluno_id", nullable = false)
+	private TurmaAluno turmaAluno;
 
 	public int getAno_letivo() {
 		return ano_letivo;
@@ -38,11 +38,11 @@ public class Curriculo extends Entidade {
 	public void setTurma(String turma) {
 		this.turma = turma;
 	}
-	public Aluno getAluno() {
-		return aluno;
+	public TurmaAluno getTurmaAluno() {
+		return turmaAluno;
 	}
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
+	public void setTurmaAluno(TurmaAluno turmaAluno) {
+		this.turmaAluno = turmaAluno;
 	}
 	
 }

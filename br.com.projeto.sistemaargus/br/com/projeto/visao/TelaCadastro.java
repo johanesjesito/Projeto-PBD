@@ -2,17 +2,13 @@ package br.com.projeto.visao;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.text.MaskFormatter;
 
 import com.toedter.calendar.JDateChooser;
-
-import sun.util.calendar.JulianCalendar;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -20,7 +16,6 @@ import javax.swing.SwingConstants;
 
 import java.awt.Font;
 import java.text.ParseException;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.swing.JRadioButton;

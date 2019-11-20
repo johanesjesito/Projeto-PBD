@@ -10,7 +10,10 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
 import br.com.projeto.entidade.AcompPedagogo;
+import br.com.projeto.entidade.Aluno;
+import br.com.projeto.entidade.Curriculo;
 import br.com.projeto.entidade.Pedagogo;
+import br.com.projeto.entidade.TurmaAluno;
 import br.com.projeto.entidade.Usuario;
 import br.com.projeto.exceptions.DAOException;
 import br.com.projeto.exceptions.ValidacaoException;
@@ -24,6 +27,7 @@ public class ControleCoordenador {
 	TelaAreaDeTrabalho areaDeTrabalho;
 	DateTimeFormatter formatter;
 	List<Usuario> usuarios;
+	List<TurmaAluno> turmaAlunos;
 	Usuario usuario;
 
 	public ControleCoordenador(TelaAreaDeTrabalho areaDeTrabalho) {
@@ -38,6 +42,7 @@ public class ControleCoordenador {
 				areaDeTrabalho.getjAreaTrabalho().add(telaPedagogo);
 				telaPedagogo.setVisible(true);
 
+				
 				final DefaultComboBoxModel combo = new DefaultComboBoxModel();
 
 				try {
@@ -51,6 +56,26 @@ public class ControleCoordenador {
 				}
 				telaPedagogo.getTxtPedagogo().setModel(combo);	
 				
+				telaPedagogo.getTxtTurma().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub
+						final DefaultComboBoxModel combo = new DefaultComboBoxModel();
+						
+						try {
+							turmaAlunos = Facade.getInstance().getboTurmaAluno().buscarListaTurmaAluno(telaPedagogo.getTxtTurma().getSelectedItem().toString(), Integer.parseInt(telaPedagogo.getTxtAnoLetivo().getText()));
+						} catch (NumberFormatException | DAOException e1) {
+							// TODO Auto-generated catch block
+							Mensagem.exibir(e1.getMessage());
+						}						
+						for (TurmaAluno turmaAluno : turmaAlunos) {
+							combo.addElement(turmaAluno.getAluno().getNome());
+						}
+						telaPedagogo.getTxtAluno().setModel(combo);		
+					}
+				});
+				
 				telaPedagogo.getBtnConfirmar().addActionListener(new ActionListener() {
 					
 					@Override
@@ -58,16 +83,18 @@ public class ControleCoordenador {
 						// TODO Auto-generated method stub
 						try {
 							AcompPedagogo acompPedagogo = new AcompPedagogo();
-							acompPedagogo.setSituacao(telaPedagogo.getTxtSituacao().getText());
+							acompPedagogo.setSituacao(telaPedagogo.getTxtSituacao().getSelectedItem().toString());
 							acompPedagogo.setSecao(telaPedagogo.getTxtSecao().getText());
-							acompPedagogo.setRelatorio_Acomp(telaPedagogo.getTxtRelatorio1().getText());
-							acompPedagogo.setRelatorio_Profissional(telaPedagogo.getTxtRelatorio2().getText());
-							formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+							usuario = Facade.getInstance().getBoUsuario()
+									.buscarUsuarioPorNomeTipo(telaPedagogo.getTxtAluno().getSelectedItem().toString(), "Aluno");
+							acompPedagogo.setAluno((Aluno) usuario);
+							acompPedagogo.setRelatorio_Acomp_Aluno(telaPedagogo.getTxtRelatorio1().getText());
+							formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 							Date date = new Date();
 							date = telaPedagogo.getTxtData().getDate();
 							acompPedagogo.setData(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 							usuario = Facade.getInstance().getBoUsuario()
-									.buscarUsuarioPorNome(telaPedagogo.getTxtPedagogo().getSelectedItem().toString());
+									.buscarUsuarioPorNomeTipo(telaPedagogo.getTxtPedagogo().getSelectedItem().toString(), "Pedagogo");
 							acompPedagogo.setPedagogo((Pedagogo) usuario);
 							
 							Facade.getInstance().inserir(acompPedagogo);

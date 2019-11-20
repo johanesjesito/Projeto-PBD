@@ -5,12 +5,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import br.com.projeto.dao.DAOUsuario;
-import br.com.projeto.entidade.Professor;
 import br.com.projeto.entidade.Usuario;
 import br.com.projeto.exceptions.BOException;
 import br.com.projeto.exceptions.DAOException;
 import br.com.projeto.util.SecurityUtil;
-import br.com.projeto.visao.Mensagem;
 
 public class BOUsuario extends BO<Usuario> {
 
@@ -86,10 +84,22 @@ public class BOUsuario extends BO<Usuario> {
 		return u;
 	}
 	
-	public Usuario buscarUsuarioPorNome(String nome) throws BOException, DAOException {
+//	public Usuario buscarUsuarioPorNome(String nome) throws BOException, DAOException {
+//
+//		Usuario u = ((DAOUsuario) this.daoT).buscaHQLGenerica(Usuario.class,
+//				"select u from Usuario as u where u.nome like '" + nome + "' and u.ativado = true");
+//
+//		if (u == null)
+//			throw new BOException("Não foram encontrado um usuario com esse login");
+//
+//		return u;
+//	}
+	
+	public Usuario buscarUsuarioPorNomeTipo(String nome, String tipo) throws BOException, DAOException {
 
 		Usuario u = ((DAOUsuario) this.daoT).buscaHQLGenerica(Usuario.class,
-				"select u from Usuario as u where u.nome like '" + nome + "' and u.ativado = true");
+				"select u from Usuario as u where u.nome like '" + nome + "' and u.tipo like '" + tipo
+						+ "' and u.ativado = true");
 
 		if (u == null)
 			throw new BOException("Não foram encontrado um usuario com esse login");
@@ -101,5 +111,11 @@ public class BOUsuario extends BO<Usuario> {
 		
 		return 	((DAOUsuario) this.daoT).buscaListaHQLGenerica(Usuario.class,
 				"select u from Usuario as u where u.tipo like '" + tipo + "' and u.ativado = true");
+	}
+	
+	public List<Usuario> buscarUsuarioPorResertSenha() throws BOException, DAOException {
+		
+		return 	((DAOUsuario) this.daoT).buscaListaHQLGenerica(Usuario.class,
+				"select u from Usuario as u where u.resetSenha = true and u.ativado = true");
 	}
 }

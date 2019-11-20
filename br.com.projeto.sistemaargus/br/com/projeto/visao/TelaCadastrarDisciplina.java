@@ -11,7 +11,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
 
 public class TelaCadastrarDisciplina extends JInternalFrame {
 

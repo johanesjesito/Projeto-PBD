@@ -7,24 +7,17 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
-import javax.swing.text.MaskFormatter;
 
 import com.toedter.calendar.JDateChooser;
-
-import sun.util.calendar.JulianCalendar;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
-import java.text.ParseException;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 

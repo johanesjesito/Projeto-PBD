@@ -5,24 +5,69 @@ import java.awt.event.ActionListener;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 
 import br.com.projeto.entidade.Contato;
 import br.com.projeto.entidade.Endereco;
 import br.com.projeto.entidade.Usuario;
+import br.com.projeto.exceptions.DAOException;
 import br.com.projeto.exceptions.ValidacaoException;
 import br.com.projeto.fachada.Facade;
 import br.com.projeto.visao.Mensagem;
 import br.com.projeto.visao.TelaAreaDeTrabalho;
 import br.com.projeto.visao.TelaCadastroAdministrador;
+import br.com.projeto.visao.TelaResetarSenha;
 
 public class ControleAdministrador {
 	
 	TelaAreaDeTrabalho areaDeTrabalho;
 	DateTimeFormatter formatter;
+	List<Usuario> usuarios;
+	Usuario usuario;
 
 	public ControleAdministrador(TelaAreaDeTrabalho areaDeTrabalho) {
 		this.areaDeTrabalho = areaDeTrabalho;
+		
+		try {
+			usuarios = Facade.getInstance().getBoUsuario().buscarUsuarioPorResertSenha();
+		} catch (DAOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		for (Usuario usuario2 : usuarios) {
+			TelaResetarSenha resetarSenha = new TelaResetarSenha();
+			areaDeTrabalho.getjAreaTrabalho().add(resetarSenha);
+			resetarSenha.setVisible(true);
 			
+			resetarSenha.getTxtUsuario().setText(usuario2.getLogin());
+			
+			resetarSenha.getBtnAlterarSenha().addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					try {
+						usuario = Facade.getInstance().getBoUsuario().buscarUsuario(resetarSenha.getTxtUsuario().getText());
+						Usuario usurTemp = new Usuario();
+						usurTemp.setId(usuario.getId());
+						usurTemp.setAtivado(usuario.isAtivado());
+						usurTemp.setLogin(usuario.getLogin());
+						usurTemp.setSenha(resetarSenha.getTxtSenha().getText());
+						usurTemp.setDataDeNascimento(usuario.getDataDeNascimento());
+						usurTemp.setNaturalidade(usuario.getNaturalidade());
+						usurTemp.setNome(usuario.getNome());
+						usurTemp.setResetSenha(false);
+						usurTemp.setTipo(usuario.getTipo());
+						Facade.getInstance().atualizar(usurTemp);
+						Mensagem.exibir("Alterado com sucesso");
+					} catch (ValidacaoException e1) {
+						// TODO Auto-generated catch block
+						Mensagem.exibir(e1.getMessage());
+					}
+				}
+			});
+		}
+					
 		areaDeTrabalho.getMntmCadastroDeUsuario().addActionListener(new ActionListener() {
 			
 			@Override

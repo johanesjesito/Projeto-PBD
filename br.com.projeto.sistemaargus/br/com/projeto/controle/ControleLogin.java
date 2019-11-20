@@ -30,11 +30,7 @@ public class ControleLogin {
 	public ControleLogin(TelaLogin telaLogin, TelaAreaDeTrabalho areaDeTrabalho) {
 		this.telaLogin = telaLogin;
 		this.areaDeTrabalho = areaDeTrabalho;
-				
-//		TelaResetarSenha resetarSenha = new TelaResetarSenha("Nome");
-//		areaDeTrabalho.getjAreaTrabalho().add(resetarSenha);
-//		resetarSenha.setVisible(true);
-		
+						
 		telaLogin.getTxtLogin().addActionListener(new ActionListener() {
 			
 			@Override

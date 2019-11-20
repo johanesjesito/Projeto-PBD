@@ -8,7 +8,8 @@ import br.com.projeto.business.BODisciplina;
 import br.com.projeto.business.BOEndereco;
 import br.com.projeto.business.BONota;
 import br.com.projeto.business.BOResponsavel;
-import br.com.projeto.business.BOTurma;
+import br.com.projeto.business.BOTurmaAluno;
+import br.com.projeto.business.BOTurmaDisciplina;
 import br.com.projeto.business.BOParcela;
 import br.com.projeto.business.BOPedagogo;
 import br.com.projeto.business.BOProfessor;
@@ -22,7 +23,8 @@ import br.com.projeto.entidade.Endereco;
 import br.com.projeto.entidade.Entidade;
 import br.com.projeto.entidade.Nota;
 import br.com.projeto.entidade.Responsavel;
-import br.com.projeto.entidade.Turma;
+import br.com.projeto.entidade.TurmaAluno;
+import br.com.projeto.entidade.TurmaDisciplina;
 import br.com.projeto.entidade.Parcela;
 import br.com.projeto.entidade.Pedagogo;
 import br.com.projeto.entidade.Professor;
@@ -52,7 +54,8 @@ public class Facade {
 	private final BOProfessor boProfessor;
 	private final BOUsuario boUsuario;
 	private final BOContato boContato;
-	private final BOTurma boTurma;
+	private final BOTurmaDisciplina boTurmaDisciplina;
+	private final BOTurmaAluno boTurmaAluno;
 
 	private Facade() 
 	{
@@ -68,7 +71,8 @@ public class Facade {
 		boProfessor = new BOProfessor();
 		boUsuario = new BOUsuario();
 		boContato = new BOContato();
-		boTurma = new BOTurma();
+		boTurmaDisciplina = new BOTurmaDisciplina();
+		boTurmaAluno = new BOTurmaAluno();
 	}
 
 	public <T extends Entidade> void inserir(T entidade) throws ValidacaoException
@@ -121,9 +125,13 @@ public class Facade {
 		{
 			boContato.inserir((Contato)entidade);
 		}
-		else if(entidade instanceof Turma)
+		else if(entidade instanceof TurmaDisciplina)
 		{
-			boTurma.inserir((Turma)entidade);
+			boTurmaDisciplina.inserir((TurmaDisciplina)entidade);
+		}
+		else if(entidade instanceof TurmaAluno)
+		{
+			boTurmaAluno.inserir((TurmaAluno)entidade);
 		}
 	}
 	
@@ -177,9 +185,13 @@ public class Facade {
 		{
 			boContato.atualizar((Contato)entidade);
 		}
-		else if(entidade instanceof Turma)
+		else if(entidade instanceof TurmaDisciplina)
 		{
-			boTurma.atualizar((Turma)entidade);
+			boTurmaDisciplina.atualizar((TurmaDisciplina)entidade);
+		}
+		else if(entidade instanceof TurmaAluno)
+		{
+			boTurmaAluno.atualizar((TurmaAluno)entidade);
 		}
 	}
 	
@@ -233,9 +245,9 @@ public class Facade {
 		{
 			return boContato.buscar(id);
 		}
-		else if(classe.getSimpleName().equals(Turma.class.getSimpleName()))
+		else if(classe.getSimpleName().equals(TurmaDisciplina.class.getSimpleName()))
 		{
-			return boTurma.buscar(id);
+			return boTurmaDisciplina.buscar(id);
 		}
 		return null;
 	}
@@ -290,9 +302,13 @@ public class Facade {
 		{
 			boContato.remover((Contato)entidade);
 		}
-		else if(entidade instanceof Turma)
+		else if(entidade instanceof TurmaDisciplina)
 		{
-			boTurma.remover((Turma)entidade);
+			boTurmaDisciplina.remover((TurmaDisciplina)entidade);
+		}
+		else if(entidade instanceof TurmaAluno)
+		{
+			boTurmaAluno.remover((TurmaAluno)entidade);
 		}
 	}
 	
@@ -346,9 +362,13 @@ public class Facade {
 		{
 			boContato.deletar((Contato)entidade);
 		}
-		else if(entidade instanceof Turma)
+		else if(entidade instanceof TurmaDisciplina)
 		{
-			boTurma.deletar((Turma)entidade);
+			boTurmaDisciplina.deletar((TurmaDisciplina)entidade);
+		}
+		else if(entidade instanceof TurmaAluno)
+		{
+			boTurmaAluno.deletar((TurmaAluno)entidade);
 		}
 	}
 	
@@ -364,6 +384,7 @@ public class Facade {
 	public BODisciplina getBoDisciplina() {return boDisciplina;}
 	public BONota getBoNota() {return boNotas;}
 	public BOCurriculo getBoCurriculo() {return boCurriculos;}
-	public BOTurma getBoTurma() {return boTurma;}
+	public BOTurmaDisciplina getboTurmaDisciplina() {return boTurmaDisciplina;}
+	public BOTurmaAluno getboTurmaAluno() {return boTurmaAluno;}
 	
 }

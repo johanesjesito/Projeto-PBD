@@ -1,15 +1,12 @@
 package br.com.projeto.visao;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.util.Date;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -20,7 +17,6 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
 public class TelaCadastroAluno extends JInternalFrame {
 

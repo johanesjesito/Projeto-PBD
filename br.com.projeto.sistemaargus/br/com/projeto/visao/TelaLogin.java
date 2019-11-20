@@ -1,9 +1,5 @@
 package br.com.projeto.visao;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -13,15 +9,10 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
-import com.sun.xml.internal.ws.api.server.Container;
-
-import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import java.awt.Color;
 
 public class TelaLogin extends JInternalFrame {

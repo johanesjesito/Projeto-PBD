@@ -7,8 +7,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "turma")
-public class Turma extends Entidade {
+@Table(name = "turmadisciplina")
+public class TurmaDisciplina extends Entidade {
 
 	@Column(nullable = false)
 	private String turma;

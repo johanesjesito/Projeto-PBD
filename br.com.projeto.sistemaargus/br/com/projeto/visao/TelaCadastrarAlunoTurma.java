@@ -1,6 +1,7 @@
 package br.com.projeto.visao;
 
 import java.awt.Font;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -10,18 +11,22 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextField;
 
-public class TelaCadastrarDiscProfTurma extends JInternalFrame {
+public class TelaCadastrarAlunoTurma extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JButton btnConfirmar;
 	private JComboBox txtTurma;
-	private JComboBox txtDisciplina;
-	private JComboBox txtProfessor;
+	private JComboBox txtAluno;
+	private JLabel lblAnoLetivo;
+	private JTextField txtAnoLetivo;
 	
-	public TelaCadastrarDiscProfTurma() {
+	public TelaCadastrarAlunoTurma() {
     	setTitle("Cadastrar Disciplinas na Turma");
     	setClosable(true);
 
@@ -45,42 +50,50 @@ public class TelaCadastrarDiscProfTurma extends JInternalFrame {
 		setBounds(320, 90, 375, 250);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBounds(0, 0, 370, 120);
+		contentPane.setBounds(0, 0, 380, 80);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnConfirmar.setBounds(226, 78, 89, 23);
+		btnConfirmar.setBounds(281, 46, 89, 23);
 		contentPane.add(btnConfirmar);
 		
-		JLabel lblTurma = new JLabel("   Turma:");
+		JLabel lblTurma = new JLabel("Turma:");
 		lblTurma.setFont(new Font("SansSerif", Font.BOLD, 12));
-		lblTurma.setBounds(20, 80, 55, 16);
+		lblTurma.setBounds(10, 48, 47, 16);
 		contentPane.add(lblTurma);
 		
 		txtTurma = new JComboBox();
 		txtTurma.setModel(new DefaultComboBoxModel(new String[] {"EF1 - 1º Ano", "EF1 - 2º Ano", "EF1 - 3º Ano", "EF1 - 4º Ano", "EF1 - 5º Ano", "EF2 - 6º Ano", "EF2 - 7º Ano", "EF2 - 8º Ano", "EF2 - 9º Ano", "EM - 1º Ano", "EM - 2º Ano", "EM - 3º Ano"}));
-		txtTurma.setBounds(77, 75, 100, 26);
+		txtTurma.setBounds(55, 44, 107, 26);
 		contentPane.add(txtTurma);
 		
-		JLabel lblDisciplina = new JLabel(" Disciplina:");
-		lblDisciplina.setFont(new Font("SansSerif", Font.BOLD, 12));
-		lblDisciplina.setBounds(10, 16, 65, 16);
-		contentPane.add(lblDisciplina);
+		txtAluno = new JComboBox();
+		txtAluno.setBounds(55, 11, 315, 26);
+		contentPane.add(txtAluno);
 		
-		txtDisciplina = new JComboBox();
-		txtDisciplina.setBounds(77, 11, 279, 26);
-		contentPane.add(txtDisciplina);
+		JLabel lblAluno = new JLabel("Aluno:");
+		lblAluno.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblAluno.setBounds(10, 16, 41, 16);
+		contentPane.add(lblAluno);
 		
-		txtProfessor = new JComboBox();
-		txtProfessor.setBounds(77, 43, 279, 26);
-		contentPane.add(txtProfessor);
+		lblAnoLetivo = new JLabel("Ano Letivo:");
+		lblAnoLetivo.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblAnoLetivo.setBounds(168, 48, 65, 16);
+		contentPane.add(lblAnoLetivo);
 		
-		JLabel lblProfessor = new JLabel("Professor:");
-		lblProfessor.setFont(new Font("SansSerif", Font.BOLD, 12));
-		lblProfessor.setBounds(10, 48, 65, 16);
-		contentPane.add(lblProfessor);
+		txtAnoLetivo = new JTextField();
+		try {
+			txtAnoLetivo = new JFormattedTextField(new MaskFormatter("####"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		txtAnoLetivo.setText("2019");
+		txtAnoLetivo.setBounds(230, 43, 48, 26);
+		contentPane.add(txtAnoLetivo);
+		txtAnoLetivo.setColumns(10);
 				
         pack();
         
@@ -94,12 +107,12 @@ public class TelaCadastrarDiscProfTurma extends JInternalFrame {
 		return txtTurma;
 	}
 
-	public JComboBox getTxtDisciplina() {
-		return txtDisciplina;
+	public JComboBox getTxtAluno() {
+		return txtAluno;
 	}
 
-	public JComboBox getTxtProfessor() {
-		return txtProfessor;
+	public JTextField getTxtAnoLetivo() {
+		return txtAnoLetivo;
 	}
 
 }

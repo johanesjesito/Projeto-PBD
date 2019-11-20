@@ -13,10 +13,10 @@ public class BONota extends BO<Nota> {
 		super(new DAONota(), Nota.class);
 	}
 
-	public List<Nota> buscarNota(int aluno_id, int ano_letivo) throws BOException, DAOException {
+	public List<Nota> buscarNota(int turmaaluno_id, int ano_letivo) throws BOException, DAOException {
 
-		return ((DAONota) this.daoT).buscaListaHQLGenerica(Nota.class, "select u from Nota as u where u.aluno.id = '"
-				+ aluno_id + "' and u.ano_letivo = '" + ano_letivo + "' and u.ativado = true");
+		return ((DAONota) this.daoT).buscaListaHQLGenerica(Nota.class, "select u from Nota as u where u.turmaaluno.id = '"
+				+ turmaaluno_id + "' and u.ano_letivo = '" + ano_letivo + "' and u.ativado = true");
 	}
-
+	
 }

@@ -15,8 +15,10 @@ public class TelaResetarSenha extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTextField txtSenha;
+	private JButton btnAlterarSenha;
+	private JTextField txtUsuario;
 	
-    public TelaResetarSenha(String nome) {
+    public TelaResetarSenha() {
     	setClosable(true);
 		setTitle("Resetar Senha");
 
@@ -49,21 +51,36 @@ public class TelaResetarSenha extends JInternalFrame {
 		lblUsuario.setBounds(52, 11, 71, 19);
 		contentPane.add(lblUsuario);
 		
-		JLabel lblNome = new JLabel(nome);
-		lblNome.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNome.setBounds(26, 41, 126, 19);
-		contentPane.add(lblNome);
-		
 		txtSenha = new JTextField();
-		txtSenha.setBounds(26, 71, 126, 32);
+		txtSenha.setBounds(26, 87, 126, 32);
 		contentPane.add(txtSenha);
 		txtSenha.setColumns(10);
 		
-		JButton btnAlterarSenha = new JButton("Alterar Senha");
+		btnAlterarSenha = new JButton("Alterar Senha");
 		btnAlterarSenha.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnAlterarSenha.setBounds(26, 115, 126, 23);
+		btnAlterarSenha.setBounds(26, 130, 126, 23);
 		contentPane.add(btnAlterarSenha);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setEditable(false);
+		txtUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
+		txtUsuario.setColumns(10);
+		txtUsuario.setBounds(26, 44, 126, 32);
+		contentPane.add(txtUsuario);
 		
         pack();
     }
+
+	public JTextField getTxtSenha() {
+		return txtSenha;
+	}
+
+	public JButton getBtnAlterarSenha() {
+		return btnAlterarSenha;
+	}
+
+	public JTextField getTxtUsuario() {
+		return txtUsuario;
+	}
+
 }

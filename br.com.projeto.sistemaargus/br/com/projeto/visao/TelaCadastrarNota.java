@@ -1,10 +1,12 @@
 package br.com.projeto.visao;
 
 import java.awt.Font;
+import java.text.ParseException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,6 +15,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JRadioButton;
 import javax.swing.DefaultComboBoxModel;
 
@@ -61,10 +64,10 @@ public class TelaCadastrarNota extends JInternalFrame {
 		    // handle exception
 		}
 		
-		setBounds(320, 90, 375, 250);
+		setBounds(305, 90, 383, 275);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBounds(0, 0, 370, 250);
+		contentPane.setBounds(0, 0, 400, 250);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -124,55 +127,55 @@ public class TelaCadastrarNota extends JInternalFrame {
 		
 		JLabel lblDisciplina = new JLabel("Disciplina:");
 		lblDisciplina.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblDisciplina.setBounds(180, 53, 61, 14);
+		lblDisciplina.setBounds(208, 53, 61, 14);
 		contentPane.add(lblDisciplina);
 		
 		txtDisciplina = new JComboBox();
-		txtDisciplina.setBounds(240, 45, 107, 29);
+		txtDisciplina.setBounds(268, 45, 107, 29);
 		contentPane.add(txtDisciplina);
 		
 		lblMediaParcial = new JLabel("Media Parcial:");
 		lblMediaParcial.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblMediaParcial.setBounds(170, 85, 89, 14);
+		lblMediaParcial.setBounds(198, 85, 89, 14);
 		contentPane.add(lblMediaParcial);
 		
 		txtMediaParcial = new JTextField();
 		txtMediaParcial.setEditable(false);
 		txtMediaParcial.setColumns(10);
-		txtMediaParcial.setBounds(258, 78, 89, 29);
+		txtMediaParcial.setBounds(286, 78, 89, 29);
 		contentPane.add(txtMediaParcial);
 		
 		txtNotaFinal = new JTextField();
 		txtNotaFinal.setEditable(false);
 		txtNotaFinal.setColumns(10);
-		txtNotaFinal.setBounds(258, 111, 89, 29);
+		txtNotaFinal.setBounds(286, 111, 89, 29);
 		contentPane.add(txtNotaFinal);
 		
 		lblNotaFinal = new JLabel("Nota Final:");
 		lblNotaFinal.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNotaFinal.setBounds(170, 118, 89, 14);
+		lblNotaFinal.setBounds(198, 118, 89, 14);
 		contentPane.add(lblNotaFinal);
 		
 		lblMediaFinal = new JLabel("Media Final:");
 		lblMediaFinal.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblMediaFinal.setBounds(170, 151, 89, 14);
+		lblMediaFinal.setBounds(198, 151, 89, 14);
 		contentPane.add(lblMediaFinal);
 		
 		txtMediaFinal = new JTextField();
 		txtMediaFinal.setEditable(false);
 		txtMediaFinal.setColumns(10);
-		txtMediaFinal.setBounds(258, 144, 89, 29);
+		txtMediaFinal.setBounds(286, 144, 89, 29);
 		contentPane.add(txtMediaFinal);
 		
 		rdbtnBimestral = new JRadioButton("Bimestral");
 		rdbtnBimestral.setSelected(true);
 		rdbtnBimestral.setFont(new Font("SansSerif", Font.BOLD, 12));
-		rdbtnBimestral.setBounds(6, 55, 83, 18);
+		rdbtnBimestral.setBounds(26, 53, 83, 18);
 		contentPane.add(rdbtnBimestral);
 		
 		rdbtnTrimestral = new JRadioButton("Trimestral");
 		rdbtnTrimestral.setFont(new Font("SansSerif", Font.BOLD, 12));
-		rdbtnTrimestral.setBounds(89, 53, 89, 18);
+		rdbtnTrimestral.setBounds(107, 53, 89, 18);
 		contentPane.add(rdbtnTrimestral);
 		
 		buttonGroup = new ButtonGroup();
@@ -181,17 +184,24 @@ public class TelaCadastrarNota extends JInternalFrame {
 		
 		lblAnoLetivo = new JLabel("Ano Letivo:");
 		lblAnoLetivo.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAnoLetivo.setBounds(170, 184, 89, 14);
+		lblAnoLetivo.setBounds(198, 184, 89, 14);
 		contentPane.add(lblAnoLetivo);
 		
 		txtAnoLetivo = new JTextField();
 		txtAnoLetivo.setColumns(10);
-		txtAnoLetivo.setBounds(258, 177, 89, 29);
+		try {
+			txtAnoLetivo = new JFormattedTextField(new MaskFormatter("####"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		txtAnoLetivo.setText("2019");
+		txtAnoLetivo.setBounds(286, 177, 89, 29);
 		contentPane.add(txtAnoLetivo);
 		
 		txtTurma = new JComboBox();
-		txtTurma.setModel(new DefaultComboBoxModel(new String[] {"EF1-1", "EF1-2", "EF1-3", "EF1-4", "EF1-5", "EF2-6", "EF2-7", "EF2-8", "EF2-9", "EM-1", "EM-2", "EM-3"}));
-		txtTurma.setBounds(275, 12, 72, 26);
+		txtTurma.setModel(new DefaultComboBoxModel(new String[] {"EF1 - 1º Ano", "EF1 - 2º Ano", "EF1 - 3º Ano", "EF1 - 4º Ano", "EF1 - 5º Ano", "EF2 - 6º Ano", "EF2 - 7º Ano", "EF2 - 8º Ano", "EF2 - 9º Ano", "EM - 1º Ano", "EM - 2º Ano", "EM - 3º Ano"}));
+		txtTurma.setBounds(275, 12, 100, 26);
 		contentPane.add(txtTurma);
 		
 		JLabel label = new JLabel("   Turma:");

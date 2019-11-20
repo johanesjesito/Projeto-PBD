@@ -36,6 +36,10 @@ public class TelaAreaDeTrabalho extends JFrame {
 	private JMenuItem mntmCadastrarNotas;
 	private JMenuItem mntmCadastrarCurriculoAluno;
 	private JMenuItem mntmCadastrarDisciplinasNa;
+	private JMenuItem mntmGerarCurriculoDo;
+	private JMenuItem mntmCadastrarAlunosNa;
+	private JMenuItem mntmGerarCurriculoDoSecre;
+	private JMenuItem mntmGerarCurriculoDoDire;
 	
 	public TelaAreaDeTrabalho() {
 		setResizable(false);
@@ -99,11 +103,17 @@ public class TelaAreaDeTrabalho extends JFrame {
 		mntmCadastrarDisciplinasNa = new JMenuItem("Cadastrar Disciplinas na Turma");
 		mnFuncionario.add(mntmCadastrarDisciplinasNa);
 		
+		mntmCadastrarAlunosNa = new JMenuItem("Cadastrar Alunos na Turma");
+		mnFuncionario.add(mntmCadastrarAlunosNa);
+		
 		mntmCadastrarNotas = new JMenuItem("Cadastrar Notas");
 		mnFuncionario.add(mntmCadastrarNotas);
 		
 		mntmCadastrarCurriculoAluno = new JMenuItem("Cadastrar Curriculo do Aluno");
 		mnFuncionario.add(mntmCadastrarCurriculoAluno);
+		
+		mntmGerarCurriculoDo = new JMenuItem("Gerar Boletim do Aluno");
+		mnFuncionario.add(mntmGerarCurriculoDo);
 		
 		mnCoordenador = new JMenu("Coordenador");
 		telaMenuBar.add(mnCoordenador);
@@ -120,8 +130,14 @@ public class TelaAreaDeTrabalho extends JFrame {
 		mntmCadastrarAluno = new JMenuItem("Cadastrar Aluno");
 		mnSecretario.add(mntmCadastrarAluno);
 		
+		mntmGerarCurriculoDoSecre = new JMenuItem("Gerar Boletim do Aluno");
+		mnSecretario.add(mntmGerarCurriculoDoSecre);
+		
 		mnDiretor = new JMenu("Diretor");
 		telaMenuBar.add(mnDiretor);
+		
+		mntmGerarCurriculoDoDire = new JMenuItem("Gerar Boletim do Aluno");
+		mnDiretor.add(mntmGerarCurriculoDoDire);
 		
 		JLabel lblAreaDeTrabalho = new JLabel("");
 		lblAreaDeTrabalho.setBackground(Color.WHITE);
@@ -196,6 +212,22 @@ public class TelaAreaDeTrabalho extends JFrame {
 
 	public JMenuItem getMntmCadastrarDisciplinasNa() {
 		return mntmCadastrarDisciplinasNa;
+	}
+
+	public JMenuItem getMntmGerarCurriculoDo() {
+		return mntmGerarCurriculoDo;
+	}
+
+	public JMenuItem getMntmCadastrarAlunosNa() {
+		return mntmCadastrarAlunosNa;
+	}
+
+	public JMenuItem getMntmGerarCurriculoDoSecre() {
+		return mntmGerarCurriculoDoSecre;
+	}
+
+	public JMenuItem getMntmGerarCurriculoDoDire() {
+		return mntmGerarCurriculoDoDire;
 	}
 
 }

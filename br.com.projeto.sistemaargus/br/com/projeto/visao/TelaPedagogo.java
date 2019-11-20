@@ -7,14 +7,17 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.text.ParseException;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -26,10 +29,14 @@ public class TelaPedagogo extends JInternalFrame {
 	private JTextField txtSecao;
 	private JDateChooser txtData;
 	private JTextArea txtRelatorio1;
-	private JTextArea txtRelatorio2;
 	private JComboBox txtPedagogo;
 	private JButton btnConfirmar;
-	private JTextField txtSituacao;
+	private JComboBox txtSituacao;
+	private JComboBox txtAluno;
+	private JLabel lblAluno;
+	private JLabel lblPedagogo;
+	private JTextField txtAnoLetivo;
+	private JComboBox txtTurma;
 	
 	public TelaPedagogo() {
 		setBounds(100, 100, 450, 300);
@@ -53,71 +60,106 @@ public class TelaPedagogo extends JInternalFrame {
 		    // handle exception
 		}
 		
-		setBounds(145, 70, 700, 303);
+		setBounds(314, 30, 380, 380);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBounds(0, 0, 700, 280);
+		contentPane.setBounds(0, 0, 380, 380);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		txtPedagogo = new JComboBox();
-		txtPedagogo.setBounds(10, 11, 163, 27);
+		txtPedagogo.setBounds(94, 29, 262, 27);
 		contentPane.add(txtPedagogo);
 		
-		txtRelatorio1 = new JTextArea();
-		JScrollPane jScrollPane1 = new JScrollPane(txtRelatorio1);
-		jScrollPane1.setBounds(10, 72, 319, 154);
+		JScrollPane jScrollPane1 = new JScrollPane();
+		jScrollPane1.setBounds(27, 206, 329, 116);
 		contentPane.add(jScrollPane1);
 		
-		txtRelatorio2 = new JTextArea();
-		JScrollPane jScrollPane2 = new JScrollPane(txtRelatorio2);
-		jScrollPane2.setBounds(355, 72, 319, 154);
-		contentPane.add(jScrollPane2);
+		txtRelatorio1 = new JTextArea();
+		jScrollPane1.setViewportView(txtRelatorio1);
 		
 		txtSecao = new JTextField();
-		txtSecao.setBounds(229, 11, 98, 27);
+		txtSecao.setBounds(316, 100, 40, 27);
 		contentPane.add(txtSecao);
 		txtSecao.setColumns(10);
 		
-		txtData = new JDateChooser("dd/MM/yyyy HH:mm:ss", "##/##/#### ##:##:##", '_');
+		txtData = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
 		txtData.setDate(new Date());
-		txtData.setBounds(539, 11, 135, 27);
+		txtData.setBounds(221, 139, 135, 27);
 		contentPane.add(txtData);
 		
 		JLabel lblSecao = new JLabel("Se\u00E7\u00E3o:");
 		lblSecao.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblSecao.setBounds(183, 17, 46, 14);
+		lblSecao.setBounds(268, 108, 46, 14);
 		contentPane.add(lblSecao);
 		
 		JLabel lblData = new JLabel("Data:");
 		lblData.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblData.setBounds(500, 17, 40, 14);
+		lblData.setBounds(183, 141, 40, 27);
 		contentPane.add(lblData);
 		
 		JLabel lblRelatorio = new JLabel("Relatorio de Acompanhamento");
 		lblRelatorio.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRelatorio.setBounds(56, 49, 196, 14);
+		lblRelatorio.setBounds(97, 180, 196, 14);
 		contentPane.add(lblRelatorio);
-		
-		JLabel lblRelatorioProfissional = new JLabel("Relatorio Profissional");
-		lblRelatorioProfissional.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRelatorioProfissional.setBounds(459, 47, 172, 14);
-		contentPane.add(lblRelatorioProfissional);
 		
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnConfirmar.setBounds(298, 240, 89, 23);
+		btnConfirmar.setBounds(140, 334, 89, 23);
 		contentPane.add(btnConfirmar);
-		
-		txtSituacao = new JTextField();
-		txtSituacao.setColumns(10);
-		txtSituacao.setBounds(396, 11, 94, 27);
-		contentPane.add(txtSituacao);
 		
 		JLabel lblSituao = new JLabel("Situa\u00E7\u00E3o:");
 		lblSituao.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblSituao.setBounds(336, 17, 60, 14);
+		lblSituao.setBounds(27, 139, 60, 27);
 		contentPane.add(lblSituao);
+		
+		txtSituacao = new JComboBox();
+		txtSituacao.setModel(new DefaultComboBoxModel(new String[] {"Pedente", "Concluindo"}));
+		txtSituacao.setBounds(87, 139, 89, 27);
+		contentPane.add(txtSituacao);
+		
+		txtAluno = new JComboBox();
+		txtAluno.setBounds(66, 101, 174, 27);
+		contentPane.add(txtAluno);
+		
+		lblAluno = new JLabel("Aluno:");
+		lblAluno.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblAluno.setBounds(27, 108, 46, 14);
+		contentPane.add(lblAluno);
+		
+		lblPedagogo = new JLabel("Pedagogo:");
+		lblPedagogo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblPedagogo.setBounds(27, 36, 67, 14);
+		contentPane.add(lblPedagogo);
+		
+		txtAnoLetivo = new JTextField();
+		try {
+			txtAnoLetivo = new JFormattedTextField(new MaskFormatter("####"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		txtAnoLetivo.setText("2019");
+		txtAnoLetivo.setColumns(10);
+		txtAnoLetivo.setBounds(296, 68, 60, 27);
+		contentPane.add(txtAnoLetivo);
+		
+		JLabel lblAnoLetivo = new JLabel("Ano Letivo:");
+		lblAnoLetivo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblAnoLetivo.setBounds(221, 74, 75, 14);
+		contentPane.add(lblAnoLetivo);
+		
+		txtTurma = new JComboBox();
+		txtTurma.setModel(new DefaultComboBoxModel(new String[] {"EF1 - 1\u00BA Ano", "EF1 - 2\u00BA Ano", "EF1 - 3\u00BA Ano", "EF1 - 4\u00BA Ano", "EF1 - 5\u00BA Ano", "EF2 - 6\u00BA Ano", "EF2 - 7\u00BA Ano", "EF2 - 8\u00BA Ano", "EF2 - 9\u00BA Ano", "EM - 1\u00BA Ano", "EM - 2\u00BA Ano", "EM - 3\u00BA Ano"}));
+		txtTurma.setBounds(72, 68, 100, 26);
+		contentPane.add(txtTurma);
+		
+		JLabel lblTurma = new JLabel("Turma:");
+		lblTurma.setFont(new Font("SansSerif", Font.BOLD, 12));
+		lblTurma.setBounds(27, 73, 46, 16);
+		contentPane.add(lblTurma);
+		
+		pack();
 	}
 
 	public JTextField getTxtSecao() {
@@ -132,10 +174,6 @@ public class TelaPedagogo extends JInternalFrame {
 		return txtRelatorio1;
 	}
 
-	public JTextArea getTxtRelatorio2() {
-		return txtRelatorio2;
-	}
-
 	public JComboBox getTxtPedagogo() {
 		return txtPedagogo;
 	}
@@ -144,8 +182,20 @@ public class TelaPedagogo extends JInternalFrame {
 		return btnConfirmar;
 	}
 
-	public JTextField getTxtSituacao() {
+	public JComboBox getTxtSituacao() {
 		return txtSituacao;
+	}
+
+	public JComboBox getTxtAluno() {
+		return txtAluno;
+	}
+
+	public JTextField getTxtAnoLetivo() {
+		return txtAnoLetivo;
+	}
+
+	public JComboBox getTxtTurma() {
+		return txtTurma;
 	}
 
 }
