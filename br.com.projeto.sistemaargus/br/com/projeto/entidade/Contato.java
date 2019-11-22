@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "contato")
-@NamedQuery(name = "Cndereco.usuario", query = "select c from Contato as c where c.ativado = true and c.usuario = :usuario")
+@NamedQuery(name = "Contato.usuario", query = "select c from Contato as c where c.ativado = true and c.usuario = :usuario")
 public class Contato extends Entidade {
 	
 	@Column(nullable = true)
