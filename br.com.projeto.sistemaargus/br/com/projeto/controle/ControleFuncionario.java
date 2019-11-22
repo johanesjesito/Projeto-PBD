@@ -54,6 +54,7 @@ public class ControleFuncionario {
 	Disciplina disciplina;
 	TurmaAluno turmaAluno;
 	TurmaDisciplina turmaDisciplina;
+	Nota nota;
 	double nota1 = 0;
 	double nota2 = 0;
 	double nota3 = 0;
@@ -619,6 +620,292 @@ public class ControleFuncionario {
 				});
 			}
 		});
+		
+		areaDeTrabalho.getMntmEditarNotas().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				TelaCadastrarNota telaEditarNota = new TelaCadastrarNota();
+				areaDeTrabalho.getjAreaTrabalho().add(telaEditarNota);
+				telaEditarNota.setVisible(true);
+	
+				telaEditarNota.setTitle("Editar Nota do Aluno");
+				telaEditarNota.getRdbtnBimestral().setVisible(false);
+				telaEditarNota.getRdbtnTrimestral().setVisible(false);
+				telaEditarNota.getBtnConfirmar().setText("Editar");
+				
+				telaEditarNota.getTxtTurma().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						final DefaultComboBoxModel combo = new DefaultComboBoxModel();
+						
+						try {
+							turmaAlunos = Facade.getInstance().getboTurmaAluno().buscarListaTurmaAluno(telaEditarNota.getTxtTurma().getSelectedItem().toString(), Integer.parseInt(telaEditarNota.getTxtAnoLetivo().getText()));
+						} catch (NumberFormatException | DAOException e1) {
+							// TODO Auto-generated catch block
+							Mensagem.exibir(e1.getMessage());
+						}						
+						for (TurmaAluno turmaAluno : turmaAlunos) {
+							combo.addElement(turmaAluno.getAluno().getNome());
+						}
+						telaEditarNota.getTxtAluno().setModel(combo);		
+					}
+				});
+								
+				telaEditarNota.getTxtTurma().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						final DefaultComboBoxModel combo2 = new DefaultComboBoxModel();
+
+						try {
+							turmaDisciplinas = Facade.getInstance().getboTurmaDisciplina()
+									.buscarListaTurma(telaEditarNota.getTxtTurma().getSelectedItem().toString());
+						} catch (DAOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						for (TurmaDisciplina turma : turmaDisciplinas) {
+							combo2.addElement(turma.getDisciplina().getNome());
+						}
+						
+						telaEditarNota.getTxtDisciplina().setModel(combo2);
+					}
+				});
+				
+				telaEditarNota.getTxtDisciplina().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						try {
+							usuario = Facade.getInstance().getBoUsuario().buscarUsuarioPorNomeTipo(telaEditarNota.getTxtAluno().getSelectedItem().toString(), "Aluno");
+							disciplina = Facade.getInstance().getBoDisciplina().buscarDisciplina(telaEditarNota.getTxtDisciplina().getSelectedItem().toString());
+							turmaAluno = Facade.getInstance().getboTurmaAluno().buscarTurma(usuario.getId(), Integer.parseInt(telaEditarNota.getTxtAnoLetivo().getText()));
+							turmaDisciplina = Facade.getInstance().getboTurmaDisciplina().buscarTurma(telaEditarNota.getTxtTurma().getSelectedItem().toString(), disciplina.getId());
+							nota = Facade.getInstance().getBoNota().buscarNota(turmaAluno.getId(), Integer.parseInt(telaEditarNota.getTxtAnoLetivo().getText()), turmaDisciplina.getId());
+							nota1 = nota.getNota1();
+							nota2 = nota.getNota2();
+							nota3 = nota.getNota3();
+							nota4 = nota.getNota4();
+							notafinal = nota.getNotaFinal();
+							mediafinal = nota.getMedia_geral();
+							mediaparcial = nota.getMedia_parcial();
+						} catch (NumberFormatException | DAOException e1) {
+							// TODO Auto-generated catch block
+							Mensagem.exibir(e1.getMessage());
+						}
+						DecimalFormat fmt = new DecimalFormat("#0.0");
+						String nota12 = fmt.format(nota1);
+						String nota22 = fmt.format(nota2);
+						String nota32 = fmt.format(nota3);
+						String nota42 = fmt.format(nota4);
+						String notafinal2 = fmt.format(notafinal);
+						String mediafinal2 = fmt.format(mediafinal);
+						String mediaparcial2 = fmt.format(mediaparcial);
+						telaEditarNota.getTxtNota1().setText(nota12);
+						telaEditarNota.getTxtNota2().setText(nota22);
+						telaEditarNota.getTxtNota3().setText(nota32);
+						telaEditarNota.getTxtNota4().setText(nota42);
+						telaEditarNota.getTxtNotaFinal().setText(notafinal2);
+						telaEditarNota.getTxtMediaFinal().setText(mediafinal2);
+						telaEditarNota.getTxtMediaParcial().setText(mediaparcial2);
+					}
+				});
+				
+				telaEditarNota.getBtnConfirmar().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub
+						try {
+							Nota notaTemp = new Nota();
+							notaTemp.setId(nota.getId());
+							notaTemp.setMedia_parcial(mediaparcial);
+							notaTemp.setMedia_geral(mediafinal);
+							notaTemp.setNota1(nota1);
+							notaTemp.setNota2(nota2);
+							notaTemp.setNota3(nota3);
+							notaTemp.setBimestral_trimestral(nota.getBimestral_trimestral());
+							if (nota.getBimestral_trimestral().equals("Bimestral")) {
+								notaTemp.setNota4(nota4);						
+							} 
+							if (nota.getBimestral_trimestral().equals("Bimestral")) {
+								notaTemp.setBimestral_trimestral("Bimestral");
+							} else {
+								notaTemp.setBimestral_trimestral("Trimestral");
+							}
+							notaTemp.setAno_letivo(Integer.parseInt(telaEditarNota.getTxtAnoLetivo().getText()));
+							usuario = Facade.getInstance().getBoUsuario()
+									.buscarUsuarioPorNomeTipo(telaEditarNota.getTxtAluno().getSelectedItem().toString(), "Aluno");
+							turmaAluno = Facade.getInstance().getboTurmaAluno().buscarTurma(usuario.getId(), Integer.parseInt(telaEditarNota.getTxtAnoLetivo().getText()));
+							disciplina = Facade.getInstance().getBoDisciplina().buscarDisciplina(telaEditarNota.getTxtDisciplina().getSelectedItem().toString());
+							turmaDisciplina = Facade.getInstance().getboTurmaDisciplina().buscarTurma(telaEditarNota.getTxtTurma().getSelectedItem().toString(), disciplina.getId());
+							notaTemp.setTurmaaluno(turmaAluno);
+							notaTemp.setTurmaDisciplina(turmaDisciplina);
+							if(mediaparcial<7 && mediaparcial>=3) {
+								notaTemp.setNotaFinal(notafinal);
+							}
+							if(mediaparcial>=7) {
+								notaTemp.setSituacao("Aprovado por Media");
+							}
+							else if(mediaparcial<7 && mediafinal>=5) {
+								notaTemp.setSituacao("Aprovado");
+							}
+							else {
+								notaTemp.setSituacao("Reprovado");								
+							}
+							Facade.getInstance().atualizar(notaTemp);
+							Mensagem.exibir("Editado com Sucesso");
+						} catch (ValidacaoException e) {
+							// TODO Auto-generated catch block
+							Mensagem.exibir(e.getMessage());
+						}
+					}
+				});
+								
+				telaEditarNota.getTxtNota1().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						if (nota.getBimestral_trimestral().equals("Bimestral")) {
+							nota1 = Double.parseDouble(telaEditarNota.getTxtNota1().getText());
+							mediaparcial = (nota1 + nota2 + nota3 + nota4) / 4;
+							mediafinal = mediaparcial;
+							DecimalFormat fmt = new DecimalFormat("#0.0");
+							String mediaparcial2 = fmt.format(mediaparcial);
+							DecimalFormat fmt2 = new DecimalFormat("#0.0");
+							String mediafinal2 = fmt2.format(mediafinal);
+							telaEditarNota.getTxtMediaParcial().setText(mediaparcial2);
+							telaEditarNota.getTxtMediaFinal().setText(mediafinal2);
+						} else {
+							nota1 = Double.parseDouble(telaEditarNota.getTxtNota1().getText());
+							mediaparcial = (nota1 + nota2 + nota3) / 3;
+							mediafinal = mediaparcial;
+							DecimalFormat fmt = new DecimalFormat("#0.0");
+							String mediaparcial2 = fmt.format(mediaparcial);
+							DecimalFormat fmt2 = new DecimalFormat("#0.0");
+							String mediafinal2 = fmt2.format(mediafinal);
+							telaEditarNota.getTxtMediaParcial().setText(mediaparcial2);
+							telaEditarNota.getTxtMediaFinal().setText(mediafinal2);
+						}
+						if (mediaparcial >= 3 && mediaparcial < 7) {
+							telaEditarNota.getTxtNotaFinal().setEditable(true);
+						} else {
+							telaEditarNota.getTxtNotaFinal().setEditable(false);
+						}
+					}
+				});	
+				telaEditarNota.getTxtNota2().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						if(nota.getBimestral_trimestral().equals("Bimestral")) {
+						nota2=Double.parseDouble(telaEditarNota.getTxtNota2().getText());
+						mediaparcial=(nota1+nota2+nota3+nota4)/4;
+						mediafinal=mediaparcial;
+						DecimalFormat fmt = new DecimalFormat("#0.0");
+						String mediaparcial2 = fmt.format(mediaparcial);
+						DecimalFormat fmt2 = new DecimalFormat("#0.0");
+						String mediafinal2 = fmt2.format(mediafinal);
+						telaEditarNota.getTxtMediaParcial().setText(mediaparcial2);
+						telaEditarNota.getTxtMediaFinal().setText(mediafinal2);
+						} else {
+							nota2=Double.parseDouble(telaEditarNota.getTxtNota2().getText());
+							mediaparcial=(nota1+nota2+nota3)/3;
+							mediafinal=mediaparcial;
+							DecimalFormat fmt = new DecimalFormat("#0.0");
+							String mediaparcial2 = fmt.format(mediaparcial);
+							DecimalFormat fmt2 = new DecimalFormat("#0.0");
+							String mediafinal2 = fmt2.format(mediafinal);
+							telaEditarNota.getTxtMediaParcial().setText(mediaparcial2);
+							telaEditarNota.getTxtMediaFinal().setText(mediafinal2);
+						}
+						if(mediaparcial>=3 && mediaparcial<7) {
+							telaEditarNota.getTxtNotaFinal().setEditable(true);
+						} else {
+							telaEditarNota.getTxtNotaFinal().setEditable(false);							
+						}
+					}
+				});	
+				telaEditarNota.getTxtNota3().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						if(nota.getBimestral_trimestral().equals("Bimestral")) {
+						nota3=Double.parseDouble(telaEditarNota.getTxtNota3().getText());
+						mediaparcial=(nota1+nota2+nota3+nota4)/4;
+						mediafinal=mediaparcial;
+						DecimalFormat fmt = new DecimalFormat("#0.0");
+						String mediaparcial2 = fmt.format(mediaparcial);
+						DecimalFormat fmt2 = new DecimalFormat("#0.0");
+						String mediafinal2 = fmt2.format(mediafinal);
+						telaEditarNota.getTxtMediaParcial().setText(mediaparcial2);
+						telaEditarNota.getTxtMediaFinal().setText(mediafinal2);
+						} else {
+							nota3=Double.parseDouble(telaEditarNota.getTxtNota3().getText());
+							mediaparcial=(nota1+nota2+nota3)/3;
+							mediafinal=mediaparcial;
+							DecimalFormat fmt = new DecimalFormat("#0.0");
+							String mediaparcial2 = fmt.format(mediaparcial);
+							DecimalFormat fmt2 = new DecimalFormat("#0.0");
+							String mediafinal2 = fmt2.format(mediafinal);
+							telaEditarNota.getTxtMediaParcial().setText(mediaparcial2);
+							telaEditarNota.getTxtMediaFinal().setText(mediafinal2);
+						}
+						if(mediaparcial>=3 && mediaparcial<7) {
+							telaEditarNota.getTxtNotaFinal().setEditable(true);
+						} else {
+							telaEditarNota.getTxtNotaFinal().setEditable(false);							
+						}
+					}
+				});	
+				telaEditarNota.getTxtNota4().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						if(nota.getBimestral_trimestral().equals("Bimestral")) {
+						nota4=Double.parseDouble(telaEditarNota.getTxtNota4().getText());
+						mediaparcial=(nota1+nota2+nota3+nota4)/4;
+						mediafinal=mediaparcial;
+						DecimalFormat fmt = new DecimalFormat("#0.0");
+						String mediaparcial2 = fmt.format(mediaparcial);
+						DecimalFormat fmt2 = new DecimalFormat("#0.0");
+						String mediafinal2 = fmt2.format(mediafinal);
+						telaEditarNota.getTxtMediaParcial().setText(mediaparcial2);
+						telaEditarNota.getTxtMediaFinal().setText(mediafinal2);
+						} 
+						if(mediaparcial>=3 && mediaparcial<7) {
+							telaEditarNota.getTxtNotaFinal().setEditable(true);
+						} else {
+							telaEditarNota.getTxtNotaFinal().setEditable(false);	
+						}
+					}
+				});
+				
+				telaEditarNota.getTxtNotaFinal().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						notafinal=Double.parseDouble(telaEditarNota.getTxtNotaFinal().getText());
+						mediafinal = (mediaparcial + notafinal) / 2;
+						DecimalFormat fmt = new DecimalFormat("#0.0");
+						String mediafinal2 = fmt.format(mediafinal);
+						telaEditarNota.getTxtMediaFinal().setText(mediafinal2);
+					}
+				});
+			}
+		});
+
 		
 		areaDeTrabalho.getMntmCadastrarDisciplina().addActionListener(new ActionListener() {
 			

@@ -49,7 +49,7 @@ public class Facade {
 	private final BOEndereco boEndereco;
 	private final BONota boNotas;
 	private final BOResponsavel boResponsavel;
-	private final BOParcela boParcelas;
+	private final BOParcela boParcela;
 	private final BOPedagogo boPedagogo;
 	private final BOProfessor boProfessor;
 	private final BOUsuario boUsuario;
@@ -66,7 +66,7 @@ public class Facade {
 		boEndereco = new BOEndereco();
 		boNotas = new BONota();
 		boResponsavel = new BOResponsavel();
-		boParcelas = new BOParcela();
+		boParcela = new BOParcela();
 		boPedagogo = new BOPedagogo();
 		boProfessor = new BOProfessor();
 		boUsuario = new BOUsuario();
@@ -111,7 +111,7 @@ public class Facade {
 		}
 		else if(entidade instanceof Parcela)
 		{
-			boParcelas.inserir((Parcela)entidade);
+			boParcela.inserir((Parcela)entidade);
 		}
 		else if(entidade instanceof Pedagogo)
 		{
@@ -171,7 +171,7 @@ public class Facade {
 		}
 		else if(entidade instanceof Parcela)
 		{
-			boParcelas.atualizar((Parcela)entidade);
+			boParcela.atualizar((Parcela)entidade);
 		}
 		else if(entidade instanceof Pedagogo)
 		{
@@ -231,7 +231,7 @@ public class Facade {
 		}
 		else if(classe.getSimpleName().equals(Parcela.class.getSimpleName()))
 		{
-			return boParcelas.buscar(id);
+			return boParcela.buscar(id);
 		}
 		else if(classe.getSimpleName().equals(Pedagogo.class.getSimpleName()))
 		{
@@ -288,7 +288,7 @@ public class Facade {
 		}
 		else if(entidade instanceof Parcela)
 		{
-			boParcelas.remover((Parcela)entidade);
+			boParcela.remover((Parcela)entidade);
 		}
 		else if(entidade instanceof Pedagogo)
 		{
@@ -348,7 +348,7 @@ public class Facade {
 		}
 		else if(entidade instanceof Parcela)
 		{
-			boParcelas.deletar((Parcela)entidade);
+			boParcela.deletar((Parcela)entidade);
 		}
 		else if(entidade instanceof Pedagogo)
 		{
@@ -386,5 +386,6 @@ public class Facade {
 	public BOCurriculo getBoCurriculo() {return boCurriculos;}
 	public BOTurmaDisciplina getboTurmaDisciplina() {return boTurmaDisciplina;}
 	public BOTurmaAluno getboTurmaAluno() {return boTurmaAluno;}
+	public BOParcela getBoParcela() {return boParcela;}
 	
 }

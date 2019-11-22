@@ -40,6 +40,13 @@ public class TelaAreaDeTrabalho extends JFrame {
 	private JMenuItem mntmCadastrarAlunosNa;
 	private JMenuItem mntmGerarCurriculoDoSecre;
 	private JMenuItem mntmGerarCurriculoDoDire;
+	private JMenuItem mntmGerarRelatorioPedagogo;
+	private JMenuItem mntmGerarRelatorioPedagogoDire;
+	private JMenuItem mntmListaDeAcompanhamento;
+	private JMenuItem mntmListaDeAcompanhamentoDire;
+	private JMenuItem mntmEditarNotas;
+	private JMenuItem mntmParcelaDoAluno;
+	private JMenuItem mntmParcelaDoAluno2;
 	
 	public TelaAreaDeTrabalho() {
 		setResizable(false);
@@ -109,17 +116,29 @@ public class TelaAreaDeTrabalho extends JFrame {
 		mntmCadastrarNotas = new JMenuItem("Cadastrar Notas");
 		mnFuncionario.add(mntmCadastrarNotas);
 		
+		mntmEditarNotas = new JMenuItem("Editar Notas");
+		mnFuncionario.add(mntmEditarNotas);
+		
 		mntmCadastrarCurriculoAluno = new JMenuItem("Cadastrar Curriculo do Aluno");
 		mnFuncionario.add(mntmCadastrarCurriculoAluno);
 		
 		mntmGerarCurriculoDo = new JMenuItem("Gerar Boletim do Aluno");
 		mnFuncionario.add(mntmGerarCurriculoDo);
 		
+		mntmParcelaDoAluno2 = new JMenuItem("Parcela do Aluno");
+		mnFuncionario.add(mntmParcelaDoAluno2);
+		
 		mnCoordenador = new JMenu("Coordenador");
 		telaMenuBar.add(mnCoordenador);
 		
 		mntmAcompanhamento = new JMenuItem("Acompanhamento");
 		mnCoordenador.add(mntmAcompanhamento);
+		
+		mntmListaDeAcompanhamento = new JMenuItem("Lista de Acompanhamento");
+		mnCoordenador.add(mntmListaDeAcompanhamento);
+		
+		mntmGerarRelatorioPedagogo = new JMenuItem("Gerar Relatorio Pedagogo");
+		mnCoordenador.add(mntmGerarRelatorioPedagogo);
 		
 		mnSecretario = new JMenu("Secretario");
 		telaMenuBar.add(mnSecretario);
@@ -133,11 +152,20 @@ public class TelaAreaDeTrabalho extends JFrame {
 		mntmGerarCurriculoDoSecre = new JMenuItem("Gerar Boletim do Aluno");
 		mnSecretario.add(mntmGerarCurriculoDoSecre);
 		
+		mntmParcelaDoAluno = new JMenuItem("Parcela do Aluno");
+		mnSecretario.add(mntmParcelaDoAluno);
+		
 		mnDiretor = new JMenu("Diretor");
 		telaMenuBar.add(mnDiretor);
 		
+		mntmListaDeAcompanhamentoDire = new JMenuItem("Lista de Acompanhamento");
+		mnDiretor.add(mntmListaDeAcompanhamentoDire);
+		
 		mntmGerarCurriculoDoDire = new JMenuItem("Gerar Boletim do Aluno");
 		mnDiretor.add(mntmGerarCurriculoDoDire);
+		
+		mntmGerarRelatorioPedagogoDire = new JMenuItem("Gerar Relatorio Pedagogo");
+		mnDiretor.add(mntmGerarRelatorioPedagogoDire);
 		
 		JLabel lblAreaDeTrabalho = new JLabel("");
 		lblAreaDeTrabalho.setBackground(Color.WHITE);
@@ -229,5 +257,35 @@ public class TelaAreaDeTrabalho extends JFrame {
 	public JMenuItem getMntmGerarCurriculoDoDire() {
 		return mntmGerarCurriculoDoDire;
 	}
+
+	public JMenuItem getMntmGerarRelatorioPedagogo() {
+		return mntmGerarRelatorioPedagogo;
+	}
+
+	public JMenuItem getMntmGerarRelatorioPedagogoDire() {
+		return mntmGerarRelatorioPedagogoDire;
+	}
+
+	public JMenuItem getMntmListaDeAcompanhamento() {
+		return mntmListaDeAcompanhamento;
+	}
+
+	public JMenuItem getMntmListaDeAcompanhamentoDire() {
+		return mntmListaDeAcompanhamentoDire;
+	}
+
+	public JMenuItem getMntmEditarNotas() {
+		return mntmEditarNotas;
+	}
+
+	public JMenuItem getMntmParcelaDoAluno() {
+		return mntmParcelaDoAluno;
+	}
+
+	public JMenuItem getMntmParcelaDoAluno2() {
+		return mntmParcelaDoAluno2;
+	}
+	
+	
 
 }
