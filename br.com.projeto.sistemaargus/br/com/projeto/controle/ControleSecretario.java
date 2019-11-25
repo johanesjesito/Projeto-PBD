@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -50,6 +51,7 @@ import br.com.projeto.visao.TelaBoletoBancario;
 import br.com.projeto.visao.TelaCadastro;
 import br.com.projeto.visao.TelaCadastroAluno;
 import br.com.projeto.visao.TelaGerarCurriculoPDF;
+import br.com.projeto.visao.TelaListaParcelas;
 
 public class ControleSecretario {
 	
@@ -59,6 +61,7 @@ public class ControleSecretario {
 	List<TurmaDisciplina> turmaDisciplinas;
 	List<TurmaAluno> turmaAlunos;
 	List<Curriculo> curriculos;
+	List<Parcela> parcelas;
 	Curriculo curriculo;
 	Usuario usuario;
 	Disciplina disciplina;
@@ -76,6 +79,66 @@ public class ControleSecretario {
 
 	public ControleSecretario(TelaAreaDeTrabalho areaDeTrabalho) {
 		this.areaDeTrabalho = areaDeTrabalho;
+		
+		areaDeTrabalho.getMntmListaDeParcelas2().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				TelaListaParcelas telaListaParcelas = new TelaListaParcelas();
+				areaDeTrabalho.getjAreaTrabalho().add(telaListaParcelas);
+				telaListaParcelas.setVisible(true);
+				
+				telaListaParcelas.getTxtTurma().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						final DefaultComboBoxModel combo = new DefaultComboBoxModel();
+
+						try {
+							turmaAlunos = Facade.getInstance().getboTurmaAluno().buscarListaTurmaAluno(
+									telaListaParcelas.getTxtTurma().getSelectedItem().toString(),
+									Integer.parseInt(telaListaParcelas.getTxtAnoLetivo().getText()));
+						} catch (NumberFormatException | DAOException e1) {
+							// TODO Auto-generated catch block
+							Mensagem.exibir(e1.getMessage());
+						}
+						for (TurmaAluno turmaAluno : turmaAlunos) {
+							combo.addElement(turmaAluno.getAluno().getNome());
+						}
+						telaListaParcelas.getTxtAluno().setModel(combo);
+
+					}
+				});
+				
+				telaListaParcelas.getTxtAluno().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						final DefaultTableModel modelo = new DefaultTableModel(
+								new Object[][] { { "Resposavel", "Data inicial", "Vencimento", "Pendencia" } },
+								new String[] { "Resposavel", "Data inicial", "Vencimento", "Pendencia" });
+						modelo.setRowCount(0);
+						modelo.addRow(new Object[] { "Resposavel", "Data inicial", "Vencimento", "Pendencia" });
+						try {
+							usuario = Facade.getInstance().getBoUsuario().buscarUsuarioPorNomeTipo(telaListaParcelas.getTxtAluno().getSelectedItem().toString(), "Aluno");
+							turmaAluno = Facade.getInstance().getboTurmaAluno().buscarTurma(usuario.getId(), Integer.parseInt(telaListaParcelas.getTxtAnoLetivo().getText()));
+							parcelas = Facade.getInstance().getBoParcela().buscarParcela(turmaAluno.getId());
+							for (Parcela parcela : parcelas) {
+								modelo.addRow(new Object[] { parcela.getResponsavel().getNome(), parcela.getDataInicial(),
+										parcela.getDataVencimento(), parcela.getPedente() });
+								telaListaParcelas.getTxtAcompanhamento().setModel(modelo);
+							}
+						} catch (DAOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}	
+					}
+				});
+			}
+		});
 		
 		areaDeTrabalho.getMntmParcelaDoAluno().addActionListener(new ActionListener() {
 			

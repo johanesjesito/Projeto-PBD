@@ -14,6 +14,9 @@ import br.com.projeto.business.BOParcela;
 import br.com.projeto.business.BOPedagogo;
 import br.com.projeto.business.BOProfessor;
 import br.com.projeto.business.BOUsuario;
+import br.com.projeto.business.BOViewInfoAluno;
+import br.com.projeto.business.BOViewInfoPedagogo;
+import br.com.projeto.business.BOViewInfoProfessor;
 import br.com.projeto.entidade.AcompPedagogo;
 import br.com.projeto.entidade.Aluno;
 import br.com.projeto.entidade.Contato;
@@ -56,6 +59,10 @@ public class Facade {
 	private final BOContato boContato;
 	private final BOTurmaDisciplina boTurmaDisciplina;
 	private final BOTurmaAluno boTurmaAluno;
+	
+	private final BOViewInfoProfessor boViewInfoProfessor;
+	private final BOViewInfoAluno boViewInfoAluno;
+	private final BOViewInfoPedagogo boViewInfoPedagogo;
 
 	private Facade() 
 	{
@@ -73,6 +80,10 @@ public class Facade {
 		boContato = new BOContato();
 		boTurmaDisciplina = new BOTurmaDisciplina();
 		boTurmaAluno = new BOTurmaAluno();
+		
+		boViewInfoPedagogo = new BOViewInfoPedagogo();
+		boViewInfoProfessor = new BOViewInfoProfessor();
+		boViewInfoAluno = new BOViewInfoAluno();
 	}
 
 	public <T extends Entidade> void inserir(T entidade) throws ValidacaoException
@@ -387,5 +398,9 @@ public class Facade {
 	public BOTurmaDisciplina getboTurmaDisciplina() {return boTurmaDisciplina;}
 	public BOTurmaAluno getboTurmaAluno() {return boTurmaAluno;}
 	public BOParcela getBoParcela() {return boParcela;}
+	
+	public BOViewInfoAluno getBoViewInfoAluno() {return boViewInfoAluno;}
+	public BOViewInfoPedagogo getBoViewInfoPedagogo() {return boViewInfoPedagogo;}
+	public BOViewInfoProfessor getBoViewInfoProfessor() {return boViewInfoProfessor;}
 	
 }

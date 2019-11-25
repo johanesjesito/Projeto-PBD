@@ -47,6 +47,9 @@ public class TelaAreaDeTrabalho extends JFrame {
 	private JMenuItem mntmEditarNotas;
 	private JMenuItem mntmParcelaDoAluno;
 	private JMenuItem mntmParcelaDoAluno2;
+	private JMenuItem mntmListaDeUsuarios;
+	private JMenuItem mntmListaDeParcelas;
+	private JMenuItem mntmListaDeParcelas2;
 	
 	public TelaAreaDeTrabalho() {
 		setResizable(false);
@@ -155,6 +158,9 @@ public class TelaAreaDeTrabalho extends JFrame {
 		mntmParcelaDoAluno = new JMenuItem("Parcela do Aluno");
 		mnSecretario.add(mntmParcelaDoAluno);
 		
+		mntmListaDeParcelas2 = new JMenuItem("Lista de Parcelas");
+		mnSecretario.add(mntmListaDeParcelas2);
+		
 		mnDiretor = new JMenu("Diretor");
 		telaMenuBar.add(mnDiretor);
 		
@@ -166,6 +172,12 @@ public class TelaAreaDeTrabalho extends JFrame {
 		
 		mntmGerarRelatorioPedagogoDire = new JMenuItem("Gerar Relatorio Pedagogo");
 		mnDiretor.add(mntmGerarRelatorioPedagogoDire);
+		
+		mntmListaDeUsuarios = new JMenuItem("Lista de Usuarios");
+		mnDiretor.add(mntmListaDeUsuarios);
+		
+		mntmListaDeParcelas = new JMenuItem("Lista de Parcelas");
+		mnDiretor.add(mntmListaDeParcelas);
 		
 		JLabel lblAreaDeTrabalho = new JLabel("");
 		lblAreaDeTrabalho.setBackground(Color.WHITE);
@@ -285,7 +297,17 @@ public class TelaAreaDeTrabalho extends JFrame {
 	public JMenuItem getMntmParcelaDoAluno2() {
 		return mntmParcelaDoAluno2;
 	}
-	
-	
 
+	public JMenuItem getMntmListaDeUsuarios() {
+		return mntmListaDeUsuarios;
+	}
+
+	public JMenuItem getMntmListaDeParcelas() {
+		return mntmListaDeParcelas;
+	}
+
+	public JMenuItem getMntmListaDeParcelas2() {
+		return mntmListaDeParcelas2;
+	}
+	
 }

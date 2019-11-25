@@ -22,19 +22,31 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import br.com.projeto.entidade.AcompPedagogo;
+import br.com.projeto.entidade.Aluno;
+import br.com.projeto.entidade.Contato;
 import br.com.projeto.entidade.Curriculo;
 import br.com.projeto.entidade.Disciplina;
+import br.com.projeto.entidade.Endereco;
 import br.com.projeto.entidade.Nota;
+import br.com.projeto.entidade.Parcela;
+import br.com.projeto.entidade.Pedagogo;
+import br.com.projeto.entidade.Professor;
 import br.com.projeto.entidade.TurmaAluno;
 import br.com.projeto.entidade.TurmaDisciplina;
 import br.com.projeto.entidade.Usuario;
+import br.com.projeto.entidade.ViewInfoAluno;
+import br.com.projeto.entidade.ViewInfoPedagogo;
+import br.com.projeto.entidade.ViewInfoProfessor;
 import br.com.projeto.exceptions.DAOException;
 import br.com.projeto.fachada.Facade;
 import br.com.projeto.visao.Mensagem;
 import br.com.projeto.visao.TelaAreaDeTrabalho;
+import br.com.projeto.visao.TelaDiretor;
 import br.com.projeto.visao.TelaEditarPedagogo;
 import br.com.projeto.visao.TelaGerarCurriculoPDF;
 import br.com.projeto.visao.TelaGerarRelatorioPedagogo;
+import br.com.projeto.visao.TelaListaParcelas;
+import javassist.CodeConverter.ArrayAccessReplacementMethodNames;
 
 public class ControleDiretor {
 
@@ -45,6 +57,8 @@ public class ControleDiretor {
 	List<TurmaAluno> turmaAlunos;
 	List<Curriculo> curriculos;
 	List<AcompPedagogo> acompPedagogos;
+	List<Parcela> parcelas;
+	
 	Curriculo curriculo;
 	Usuario usuario, usuario2;
 	Disciplina disciplina;
@@ -62,6 +76,136 @@ public class ControleDiretor {
 	public ControleDiretor(TelaAreaDeTrabalho areaDeTrabalho) {
 		this.areaDeTrabalho = areaDeTrabalho;
 
+		areaDeTrabalho.getMntmListaDeParcelas().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				TelaListaParcelas telaListaParcelas = new TelaListaParcelas();
+				areaDeTrabalho.getjAreaTrabalho().add(telaListaParcelas);
+				telaListaParcelas.setVisible(true);
+				
+				telaListaParcelas.getTxtTurma().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						final DefaultComboBoxModel combo = new DefaultComboBoxModel();
+
+						try {
+							turmaAlunos = Facade.getInstance().getboTurmaAluno().buscarListaTurmaAluno(
+									telaListaParcelas.getTxtTurma().getSelectedItem().toString(),
+									Integer.parseInt(telaListaParcelas.getTxtAnoLetivo().getText()));
+						} catch (NumberFormatException | DAOException e1) {
+							// TODO Auto-generated catch block
+							Mensagem.exibir(e1.getMessage());
+						}
+						for (TurmaAluno turmaAluno : turmaAlunos) {
+							combo.addElement(turmaAluno.getAluno().getNome());
+						}
+						telaListaParcelas.getTxtAluno().setModel(combo);
+
+					}
+				});
+				
+				telaListaParcelas.getTxtAluno().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						final DefaultTableModel modelo = new DefaultTableModel(
+								new Object[][] { { "Resposavel", "Data inicial", "Vencimento", "Pendencia" } },
+								new String[] { "Resposavel", "Data inicial", "Vencimento", "Pendencia" });
+						modelo.setRowCount(0);
+						modelo.addRow(new Object[] { "Resposavel", "Data inicial", "Vencimento", "Pendencia" });
+						try {
+							usuario = Facade.getInstance().getBoUsuario().buscarUsuarioPorNomeTipo(telaListaParcelas.getTxtAluno().getSelectedItem().toString(), "Aluno");
+							turmaAluno = Facade.getInstance().getboTurmaAluno().buscarTurma(usuario.getId(), Integer.parseInt(telaListaParcelas.getTxtAnoLetivo().getText()));
+							parcelas = Facade.getInstance().getBoParcela().buscarParcela(turmaAluno.getId());
+							for (Parcela parcela : parcelas) {
+								modelo.addRow(new Object[] { parcela.getResponsavel().getNome(), parcela.getDataInicial(),
+										parcela.getDataVencimento(), parcela.getPedente() });
+								telaListaParcelas.getTxtAcompanhamento().setModel(modelo);
+							}
+						} catch (DAOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}	
+					}
+				});
+			}
+		});
+		
+		areaDeTrabalho.getMntmListaDeUsuarios().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				TelaDiretor telaDiretor = new TelaDiretor();
+				areaDeTrabalho.getjAreaTrabalho().add(telaDiretor);
+				telaDiretor.setVisible(true);
+	
+				final DefaultTableModel modelo = new DefaultTableModel(
+						new Object[][] { { "Nome", "CPF", "Rua", "Telefone" } },
+						new String[] { "Nome", "CPF", "Rua", "Telefone" });
+
+				telaDiretor.getTxtUsuarios().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						modelo.setRowCount(0);
+						modelo.addRow(new Object[] {"Nome", "CPF", "Rua", "Telefone"});
+						
+						if(telaDiretor.getTxtUsuarios().getSelectedItem().toString().equals("Professores")) {
+							try {
+								usuarios = Facade.getInstance().getBoUsuario().buscarUsuarioPorTipo("Professor");
+								for (Usuario usuario: usuarios) {
+									Endereco endereco = Facade.getInstance().getBoEndereco().buscarEndereco(usuario.getId());
+									Contato contato = Facade.getInstance().getBoContato().buscarContato(usuario.getId());
+									Professor professor = Facade.getInstance().getBoProfessor().buscar(usuario.getId());
+									modelo.addRow(new Object[] { usuario.getNome(), professor.getCpf(), endereco.getRua(), contato.getTelefone() });								
+								}
+								telaDiretor.getTxtLista().setModel(modelo);
+							} catch (DAOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						} else if(telaDiretor.getTxtUsuarios().getSelectedItem().toString().equals("Alunos")) {
+							try {
+								usuarios = Facade.getInstance().getBoUsuario().buscarUsuarioPorTipo("Aluno");
+								for (Usuario usuario: usuarios) {
+									Endereco endereco = Facade.getInstance().getBoEndereco().buscarEndereco(usuario.getId());
+									Contato contato = Facade.getInstance().getBoContato().buscarContato(usuario.getId());
+									Aluno aluno = Facade.getInstance().getBoAluno().buscar(usuario.getId());
+									modelo.addRow(new Object[] { usuario.getNome(), aluno.getCpf(), endereco.getRua(), contato.getTelefone() });								
+								}
+								telaDiretor.getTxtLista().setModel(modelo);
+							} catch (DAOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						} else if(telaDiretor.getTxtUsuarios().getSelectedItem().toString().equals("Pedagogos")) {
+							try {
+								usuarios = Facade.getInstance().getBoUsuario().buscarUsuarioPorTipo("Pedagogo");
+								for (Usuario usuario: usuarios) {
+									Endereco endereco = Facade.getInstance().getBoEndereco().buscarEndereco(usuario.getId());
+									Contato contato = Facade.getInstance().getBoContato().buscarContato(usuario.getId());
+									Pedagogo pedagogo = Facade.getInstance().getBoPedagogo().buscar(usuario.getId());
+									modelo.addRow(new Object[] { usuario.getNome(), pedagogo.getCpf(), endereco.getRua(), contato.getTelefone() });								
+								}
+								telaDiretor.getTxtLista().setModel(modelo);
+							} catch (DAOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
+					}
+				});
+
+			}
+		});
+		
 		areaDeTrabalho.getMntmGerarRelatorioPedagogoDire().addActionListener(new ActionListener() {
 			
 			@Override

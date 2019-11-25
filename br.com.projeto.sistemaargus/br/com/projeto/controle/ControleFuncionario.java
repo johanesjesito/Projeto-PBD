@@ -5,17 +5,25 @@ import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.Barcode128;
+import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -24,6 +32,7 @@ import br.com.projeto.entidade.Aluno;
 import br.com.projeto.entidade.Curriculo;
 import br.com.projeto.entidade.Disciplina;
 import br.com.projeto.entidade.Nota;
+import br.com.projeto.entidade.Parcela;
 import br.com.projeto.entidade.Professor;
 import br.com.projeto.entidade.TurmaAluno;
 import br.com.projeto.entidade.TurmaDisciplina;
@@ -33,6 +42,7 @@ import br.com.projeto.exceptions.ValidacaoException;
 import br.com.projeto.fachada.Facade;
 import br.com.projeto.visao.Mensagem;
 import br.com.projeto.visao.TelaAreaDeTrabalho;
+import br.com.projeto.visao.TelaBoletoBancario;
 import br.com.projeto.visao.TelaCadastrarAlunoTurma;
 import br.com.projeto.visao.TelaCadastrarCurriculo;
 import br.com.projeto.visao.TelaCadastrarDiscProfTurma;
@@ -49,6 +59,8 @@ public class ControleFuncionario {
 	List<TurmaDisciplina> turmaDisciplinas;
 	List<TurmaAluno> turmaAlunos;
 	List<Curriculo> curriculos;
+	Aluno aluno;
+	Parcela parcela;
 	Curriculo curriculo;
 	Usuario usuario;
 	Disciplina disciplina;
@@ -66,6 +78,196 @@ public class ControleFuncionario {
 	public ControleFuncionario(TelaAreaDeTrabalho areaDeTrabalho) {
 		this.areaDeTrabalho = areaDeTrabalho;
 		
+		areaDeTrabalho.getMntmParcelaDoAluno2().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				TelaBoletoBancario telaBoletoBancario = new TelaBoletoBancario();
+				areaDeTrabalho.getjAreaTrabalho().add(telaBoletoBancario);
+				telaBoletoBancario.setVisible(true);
+									
+				telaBoletoBancario.getTxtTurma().addActionListener(new ActionListener() {					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						final DefaultComboBoxModel combo = new DefaultComboBoxModel();
+						
+						try {
+							turmaAlunos = Facade.getInstance().getboTurmaAluno().buscarListaTurmaAluno(telaBoletoBancario.getTxtTurma().getSelectedItem().toString(), Integer.parseInt(telaBoletoBancario.getTxtAnoLetivo().getText()));
+						} catch (NumberFormatException | DAOException e1) {
+							// TODO Auto-generated catch block
+							Mensagem.exibir(e1.getMessage());
+						}						
+						for (TurmaAluno turmaAluno : turmaAlunos) {
+							combo.addElement(turmaAluno.getAluno().getNome());
+						}
+						telaBoletoBancario.getTxtAluno().setModel(combo);		
+					}
+				});
+				
+				telaBoletoBancario.getBtnConfirmar().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub
+						try {
+							parcela = new Parcela();
+							Random gerador = new Random();
+							int inteiro = gerador.nextInt(899999999) + 100000000;
+							int inteiro2 = gerador.nextInt(899999999) + 100000000;
+							int inteiro3 = gerador.nextInt(899999999) + 100000000;
+							String codigo = Integer.toString(inteiro) + Integer.toString(inteiro2) + Integer.toString(inteiro3);
+							aluno = (Aluno) Facade.getInstance().getBoUsuario().buscarUsuarioPorNomeTipo(telaBoletoBancario.getTxtAluno().getSelectedItem().toString(), "Aluno");
+							turmaAluno = Facade.getInstance().getboTurmaAluno().buscarTurma(aluno.getId(), Integer.parseInt(telaBoletoBancario.getTxtAnoLetivo().getText()));
+							parcela.setCodigo(codigo);
+							parcela.setTurmaAluno(turmaAluno);
+							parcela.setResponsavel(aluno.getResponsavel());
+							if(telaBoletoBancario.getTxtTurma().getSelectedItem().toString().equals("EM - 1º Ano") || telaBoletoBancario.getTxtTurma().getSelectedItem().toString().equals("EM - 2º Ano") || telaBoletoBancario.getTxtTurma().getSelectedItem().toString().equals("EM - 3º Ano")) {
+								parcela.setValor(800.00);
+							}
+							else if(telaBoletoBancario.getTxtTurma().getSelectedItem().toString().equals("EF2 - 6º Ano") || telaBoletoBancario.getTxtTurma().getSelectedItem().toString().equals("EF2 - 7º Ano") || telaBoletoBancario.getTxtTurma().getSelectedItem().toString().equals("EF2 - 8º Ano") || telaBoletoBancario.getTxtTurma().getSelectedItem().toString().equals("EF2 - 9º Ano")) {
+								parcela.setValor(600.00);								
+							}
+							else {
+								parcela.setValor(400.00);
+							}
+							Date date = new Date();
+							date = telaBoletoBancario.getTxtDataInicial().getDate();
+							parcela.setDataInicial(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+							Date date2 = new Date();
+							date2 = telaBoletoBancario.getTxtDataFinal().getDate();
+							parcela.setDataVencimento(date2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+							parcela.setPedente("Pedente");
+							Facade.getInstance().inserir(parcela);
+							Mensagem.exibir("Cadastrado");
+						} catch (ValidacaoException e) {
+							// TODO Auto-generated catch block
+							Mensagem.exibir(e.getMessage());
+						}
+						
+					}
+				});
+				
+				telaBoletoBancario.getBtnGerarBoleto().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub
+						Document document = new Document();
+						try {
+							PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Documento/PDF_DevMedia4.pdf"));
+							document.open();
+							PdfPTable table = new PdfPTable(9);
+							PdfPCell cell = new PdfPCell(new Phrase("BANCO",
+									new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.BLACK)));
+							cell.setColspan(2);
+							cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+							table.addCell(cell);
+							cell = new PdfPCell(new Phrase("Codigo: " + parcela.getCodigo(),
+									new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.BLACK)));
+							cell.setColspan(7);
+							cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+							table.addCell(cell);
+							cell = new PdfPCell(new Phrase("Pagavel em qualquer agência até a data do vencimento",
+									new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.BLACK)));
+							cell.setColspan(7);
+							cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+							table.addCell(cell);
+							cell = new PdfPCell(new Phrase("Vecimento: " + parcela.getDataVencimento(),
+									new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.BLACK)));
+							cell.setColspan(2);
+							cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+							table.addCell(cell);
+							cell = new PdfPCell(new Phrase("Responsavel: " + parcela.getResponsavel().getNome(),
+									new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.BLACK)));
+							cell.setColspan(7);
+							cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+							table.addCell(cell);
+							cell = new PdfPCell(new Phrase("Data Inicial: " + parcela.getDataInicial(),
+									new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.BLACK)));
+							cell.setColspan(2);
+							cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+							table.addCell(cell);
+							cell = new PdfPCell(new Phrase("Aluno: " + parcela.getTurmaAluno().getAluno().getNome(),
+									new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.BLACK)));
+							cell.setColspan(5);
+							cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+							table.addCell(cell);
+							cell = new PdfPCell(new Phrase("Quantidade: 1",
+									new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.BLACK)));
+							cell.setColspan(2);
+							cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+							table.addCell(cell);
+							cell = new PdfPCell(new Phrase("R$",
+									new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.BLACK)));
+							cell.setColspan(1);
+							cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+							table.addCell(cell);
+							DecimalFormat fmt = new DecimalFormat("#0.00");
+							String preco = fmt.format(parcela.getValor());
+							cell = new PdfPCell(new Phrase(preco,
+									new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.BLACK)));
+							cell.setColspan(1);
+							cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+							table.addCell(cell);
+							document.add(table);
+							document.add(new Paragraph(" "));
+							PdfContentByte cb = writer.getDirectContent();
+							Barcode128 codeEAN = new Barcode128();
+							codeEAN.setCodeType(codeEAN.CODE128);
+							codeEAN.setCode(parcela.getCodigo());
+							Image imageEAN = codeEAN.createImageWithBarcode(cb, null, null);
+							Paragraph pTitulo = new Paragraph(new Phrase(new Chunk(imageEAN, 0, 0)));
+							pTitulo.setAlignment(Element.ALIGN_CENTER);
+							document.add(pTitulo);
+						} catch (DocumentException de) {
+							Mensagem.exibir(de.getMessage());
+						} catch (IOException ioe) {
+							Mensagem.exibir(ioe.getMessage());
+						}
+						document.close();
+						Mensagem.exibir("PDF GERADO");
+						try {
+							Runtime.getRuntime()
+									.exec(new String[] { "cmd.exe", "/c", "start", "Documento/PDF_DevMedia4.pdf" });
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							Mensagem.exibir(e1.getMessage());
+						}
+					}
+				});
+								
+				telaBoletoBancario.getBtnPago().addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						try {
+							parcela = Facade.getInstance().getBoParcela().buscarParcela(telaBoletoBancario.getTxtCodigo().getText());
+							
+							Parcela parceTemp = new Parcela();
+							parceTemp.setId(parcela.getId());
+							parceTemp.setCodigo(parcela.getCodigo());
+							parceTemp.setDataInicial(parcela.getDataInicial());
+							parceTemp.setDataVencimento(parcela.getDataVencimento());
+							parceTemp.setPedente("Pago");
+							parceTemp.setResponsavel(parcela.getResponsavel());
+							parceTemp.setTurmaAluno(parcela.getTurmaAluno());
+							parceTemp.setValor(parcela.getValor());
+							
+							Facade.getInstance().atualizar(parceTemp);
+							Mensagem.exibir("Boleto pago com Sucesso");
+						} catch (ValidacaoException e1) {
+							// TODO Auto-generated catch block
+							Mensagem.exibir(e1.getMessage());
+						}
+						
+					}
+				});
+			}
+		});
+
 		areaDeTrabalho.getMntmCadastrarAlunosNa().addActionListener(new ActionListener() {
 			
 			@Override
