@@ -17,7 +17,7 @@ public class Curriculo extends Entidade {
 	@Column(nullable = false)
 	private String turma;
 	@OneToOne
-	@JoinColumn(name = "turmaAluno_id", nullable = false)
+	@JoinColumn(name = "turmaAluno_id", nullable = false, unique=true)
 	private TurmaAluno turmaAluno;
 
 	public int getAno_letivo() {
