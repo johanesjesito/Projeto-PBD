@@ -30,6 +30,12 @@ public class ControleLogin {
 	public ControleLogin(TelaLogin telaLogin, TelaAreaDeTrabalho areaDeTrabalho) {
 		this.telaLogin = telaLogin;
 		this.areaDeTrabalho = areaDeTrabalho;
+		
+		ControleAdministrador controleAdministrador = new ControleAdministrador(areaDeTrabalho);
+		ControleSecretario controleSecretario = new ControleSecretario(areaDeTrabalho);
+		ControleCoordenador controleCoordenador = new ControleCoordenador(areaDeTrabalho);
+		ControleFuncionario controleFuncionario = new ControleFuncionario(areaDeTrabalho);
+		ControleDiretor controleDiretor = new ControleDiretor(areaDeTrabalho);
 						
 		telaLogin.getTxtLogin().addActionListener(new ActionListener() {
 			
@@ -54,7 +60,6 @@ public class ControleLogin {
 							userTemp.setNaturalidade(usuario.getNaturalidade());
 							userTemp.setSenha(tempSenha);								
 							userTemp.setDataDeNascimento(usuario.getDataDeNascimento());
-
 							Facade.getInstance().atualizar(userTemp);
 
 						} catch (ValidacaoException e1) {
@@ -72,36 +77,27 @@ public class ControleLogin {
 						areaDeTrabalho.getMnDiretor().setVisible(true);
 						areaDeTrabalho.getMnFuncionario().setVisible(true);
 						areaDeTrabalho.getMnSecretario().setVisible(true);						
-						ControleAdministrador controleAdministrador = new ControleAdministrador(areaDeTrabalho);
-						ControleSecretario controleSecretario = new ControleSecretario(areaDeTrabalho);
-						ControleCoordenador controleCoordenador = new ControleCoordenador(areaDeTrabalho);
-						ControleFuncionario controleFuncionario = new ControleFuncionario(areaDeTrabalho);
-						ControleDiretor controleDiretor = new ControleDiretor(areaDeTrabalho);
 						Mensagem.exibir("Bem Vindo Administrador");
 												
 					} else if (usuario.getTipo().equalsIgnoreCase("Coordenador")) {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
 						areaDeTrabalho.getMnCoordenador().setVisible(true);
-						ControleCoordenador controleCoordenador = new ControleCoordenador(areaDeTrabalho);
 						Mensagem.exibir("Bem vindo " + usuario.getNome());
 					} else if (usuario.getTipo().equalsIgnoreCase("Diretor")) {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
 						areaDeTrabalho.getMnDiretor().setVisible(true);
-						ControleDiretor controleDiretor = new ControleDiretor(areaDeTrabalho);
 						Mensagem.exibir("Bem vindo " + usuario.getNome());
 					} else if (usuario.getTipo().equalsIgnoreCase("Funcionario")) {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
 						areaDeTrabalho.getMnFuncionario().setVisible(true);
-						ControleFuncionario controleFuncionario = new ControleFuncionario(areaDeTrabalho);
 						Mensagem.exibir("Bem vindo " + usuario.getNome());
 					} else if (usuario.getTipo().equalsIgnoreCase("Secretario")) {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
 						areaDeTrabalho.getMnSecretario().setVisible(true);
-						ControleSecretario controleSecretario = new ControleSecretario(areaDeTrabalho);
 						Mensagem.exibir("Bem vindo " + usuario.getNome());
 					}							
 				} catch (DAOException e1) {
@@ -152,36 +148,27 @@ public class ControleLogin {
 						areaDeTrabalho.getMnDiretor().setVisible(true);
 						areaDeTrabalho.getMnFuncionario().setVisible(true);
 						areaDeTrabalho.getMnSecretario().setVisible(true);						
-						ControleAdministrador controleAdministrador = new ControleAdministrador(areaDeTrabalho);
-						ControleSecretario controleSecretario = new ControleSecretario(areaDeTrabalho);
-						ControleCoordenador controleCoordenador = new ControleCoordenador(areaDeTrabalho);
-						ControleFuncionario controleFuncionario = new ControleFuncionario(areaDeTrabalho);
-						ControleDiretor controleDiretor = new ControleDiretor(areaDeTrabalho);
 						Mensagem.exibir("Bem Vindo Administrador");
 												
 					} else if (usuario.getTipo().equalsIgnoreCase("Coordenador")) {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
 						areaDeTrabalho.getMnCoordenador().setVisible(true);
-						ControleCoordenador controleCoordenador = new ControleCoordenador(areaDeTrabalho);
 						Mensagem.exibir("Bem vindo " + usuario.getNome());
 					} else if (usuario.getTipo().equalsIgnoreCase("Diretor")) {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
 						areaDeTrabalho.getMnDiretor().setVisible(true);
-						ControleDiretor controleDiretor = new ControleDiretor(areaDeTrabalho);
 						Mensagem.exibir("Bem vindo " + usuario.getNome());
 					} else if (usuario.getTipo().equalsIgnoreCase("Funcionario")) {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
 						areaDeTrabalho.getMnFuncionario().setVisible(true);
-						ControleFuncionario controleFuncionario = new ControleFuncionario(areaDeTrabalho);
 						Mensagem.exibir("Bem vindo " + usuario.getNome());
 					} else if (usuario.getTipo().equalsIgnoreCase("Secretario")) {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
 						areaDeTrabalho.getMnSecretario().setVisible(true);
-						ControleSecretario controleSecretario = new ControleSecretario(areaDeTrabalho);
 						Mensagem.exibir("Bem vindo " + usuario.getNome());
 					}							
 				} catch (DAOException e1) {
@@ -243,36 +230,27 @@ public class ControleLogin {
 						areaDeTrabalho.getMnDiretor().setVisible(true);
 						areaDeTrabalho.getMnFuncionario().setVisible(true);
 						areaDeTrabalho.getMnSecretario().setVisible(true);						
-						ControleAdministrador controleAdministrador = new ControleAdministrador(areaDeTrabalho);
-						ControleSecretario controleSecretario = new ControleSecretario(areaDeTrabalho);
-						ControleCoordenador controleCoordenador = new ControleCoordenador(areaDeTrabalho);
-						ControleFuncionario controleFuncionario = new ControleFuncionario(areaDeTrabalho);
-						ControleDiretor controleDiretor = new ControleDiretor(areaDeTrabalho);
 						Mensagem.exibir("Bem Vindo Administrador");
 												
 					} else if (usuario.getTipo().equalsIgnoreCase("Coordenador")) {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
 						areaDeTrabalho.getMnCoordenador().setVisible(true);
-						ControleCoordenador controleCoordenador = new ControleCoordenador(areaDeTrabalho);
 						Mensagem.exibir("Bem vindo " + usuario.getNome());
 					} else if (usuario.getTipo().equalsIgnoreCase("Diretor")) {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
 						areaDeTrabalho.getMnDiretor().setVisible(true);
-						ControleDiretor controleDiretor = new ControleDiretor(areaDeTrabalho);
 						Mensagem.exibir("Bem vindo " + usuario.getNome());
 					} else if (usuario.getTipo().equalsIgnoreCase("Funcionario")) {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
 						areaDeTrabalho.getMnFuncionario().setVisible(true);
-						ControleFuncionario controleFuncionario = new ControleFuncionario(areaDeTrabalho);
 						Mensagem.exibir("Bem vindo " + usuario.getNome());
 					} else if (usuario.getTipo().equalsIgnoreCase("Secretario")) {
 						telaLogin.setVisible(false);
 						areaDeTrabalho.getMnArquivos().setVisible(true);
 						areaDeTrabalho.getMnSecretario().setVisible(true);
-						ControleSecretario controleSecretario = new ControleSecretario(areaDeTrabalho);
 						Mensagem.exibir("Bem vindo " + usuario.getNome());
 					}							
 				} catch (DAOException e1) {
